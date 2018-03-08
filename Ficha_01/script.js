@@ -111,6 +111,7 @@ function eco(){
 function valoresIntervalo(){
     let num1 = parseInt(prompt("Insira o primeiro valor:"))
     let num2 = parseInt(prompt("Insira o segundo valor:"))
+    output("Valores no intervalo [" + num1 + ", " + num2 + "[")
     for(let i=num1; i<num2; i++){
         console.log(i)
         adicionarElementos(i)
@@ -119,6 +120,8 @@ function valoresIntervalo(){
 
 function tabuada(){
     let num = parseInt(prompt("Qual a tabuada desejada?"))
+    console.log("Tabuada do " + num + ":")
+    output("Tabuada do " + num + ":")
     for(let i=1; i<=10; i++){
         console.log(num + " x " + i + " = " + num*i)
         adicionarElementos(num + " x " + i + " = " + num*i)
@@ -134,8 +137,8 @@ function multiplos3(){
             soma += i
         }
     }
-    console.log("Soma dos múltiplos de 3 no intervalo [" + num1 + ", " + num2 + "[ = " + soma)
-    output("Soma dos múltiplos de 3 no intervalo [" + num1 + ", " + num2 + "[ = " + soma)
+    console.log("Soma dos múltiplos de 3 no intervalo [" + num1 + ", " + num2 + "] = " + soma)
+    output("Soma dos múltiplos de 3 no intervalo [" + num1 + ", " + num2 + "] = " + soma)
 
 }
 
@@ -191,7 +194,7 @@ function perfeito(){
     }
 }
 
-function bissexto(){    
+function bissexto(){   
     let bissexto = false
     let ano = parseInt(prompt("Insira o ano desejado:"))
     if(ano % 4 == 0 && ano % 100 == 0 && ano % 400 == 0){
