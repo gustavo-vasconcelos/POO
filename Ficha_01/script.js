@@ -67,44 +67,35 @@ function imc(){
     let altura = parseInt(prompt("Insira a sua altura em metros:"))
     let peso = parseInt(prompt("Insira a sua massa em kg"))
     let imc = peso / (altura * altura)
-    if(imc == NaN){
-        if(imc < 18.5){
-            console.log("Está abaixo do peso.")
-            output("Está abaixo do peso.")
-        }else if(imc <= 24.9){
-            console.log("Está com peso normal.")        
-            output("Está com peso normal.")
-        }else if(imc <= 29.9){
-            console.log("Está com sobrepeso.")        
-            output("Está com sobrepeso.")
-        }else if(imc <= 34.9){
-            console.log("Está com obesidade grau I.")    
-            output("Está com obesidade grau I.")    
-        }else if(imc <= 39.9){
-            console.log("Está com obesidade grau II.") 
-            output("Está com obesidade grau II.")       
-        }else{
-            console.log("Está com obesidade grau III.")          
-            output("Está com obesidade grau III.")      
-        }
+    console.log(imc)
+    if(imc < 18.5){
+        console.log("Está abaixo do peso.")
+        output("Está abaixo do peso.")
+    }else if(imc <= 24.9){
+        console.log("Está com peso normal.")        
+        output("Está com peso normal.")
+    }else if(imc <= 29.9){
+        console.log("Está com sobrepeso.")        
+        output("Está com sobrepeso.")
+    }else if(imc <= 34.9){
+        console.log("Está com obesidade grau I.")    
+        output("Está com obesidade grau I.")    
+    }else if(imc <= 39.9){
+        console.log("Está com obesidade grau II.") 
+        output("Está com obesidade grau II.")       
     }else{
-        console.log("Insira os campos corretamente!")
-        output("Insira os campos corretamente!")
-    }
+        console.log("Está com obesidade grau III.")          
+        output("Está com obesidade grau III.")      
+    } 
 }
 
 function eco(){
     let string = prompt("Escreva algo:")
     let vezes = parseInt(prompt("Deseja repetir quantas vezes?"))
-    if(vezes == NaN){
-        for(let i=0; i<vezes; i++){
-            console.log(string)
-        }
-        output("(" + vezes + ") " + string)
-    }else{
-        console.log("Insira os campos corretamente!")
-        output("Insira os campos corretamente!")
+    for(let i=0; i<vezes; i++){
+        console.log(string)
     }
+    output("(" + vezes + ") " + string)
 
 }
 
