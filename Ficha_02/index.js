@@ -176,24 +176,37 @@ function incrementar1(){
     output("Incrementado 1: " + array)
 }
 
-
-//INCOMPLETO
 function somarArrays(){
     let tamanho = parseInt(prompt("Insira o tamanho do primeiro array:"))
     let array = []
     for(let i=0; i < tamanho; i++){
-        array[i] = parseInt(prompt("Insira o " + (i+1) + "º elemento do primeiro array:")) + 1
+        array[i] = parseInt(prompt("Insira o " + (i+1) + "º elemento do primeiro array:"))
     }
-
+    console.log("Array 1: " + array)
     let tamanho2 = parseInt(prompt("Insira o tamanho do segundo array:"))
     let array2 = []
     for(let i=0; i < tamanho2; i++){
-        array2[i] = parseInt(prompt("Insira o " + (i+1) + "º elemento do segundo array:")) + 1
+        array2[i] = parseInt(prompt("Insira o " + (i+1) + "º elemento do segundo array:"))
     }
+    console.log("Array 2: " + array2)
 
-    let soma = array2.map(function (num, indx){
-        return num + array[indx]
-    })
-    
-    console.log(soma)
+    let array3 = []
+
+    if(array.length >= array2.length){
+        for(let i in array2){
+            array3[i] = array[i] + array2[i]
+        }
+        for(let i=array2.length; i<array.length; i++){
+            array3.push(array[i])
+        }
+    }else{
+        for(let i in array){
+            array3[i] = array[i] + array2[i]
+        }
+        for(let i=array.length; i<array2.length; i++){
+            array3.push(array2[i])
+        }
+    }
+    console.log("Soma de cada elemento dos dois arrays: " + array3 + ".")
+    output("Soma de cada elemento dos dois arrays: " + array3 + ".")
 }
