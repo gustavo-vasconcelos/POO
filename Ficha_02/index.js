@@ -162,8 +162,14 @@ function numerosPares(){
             array2.push(array[i])
         }
     }
-    console.log("Array com elementos pares apenas: " + array2 + ".")
-    output("Array com elementos pares apenas: " + array2 + ".")
+    if(array2.length != 0){
+        console.log("Array com elementos pares apenas: " + array2 + ".")
+        output("Array com elementos pares apenas: " + array2 + ".")
+    }else{
+        console.log("Não há elementos pares no array.")
+        output("Não há elementos pares no array.")
+    }
+    
 }
 
 function incrementar1(){
