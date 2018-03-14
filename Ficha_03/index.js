@@ -4,14 +4,6 @@ function output(texto){
     elemento.innerHTML = texto;
 }
 
-function adicionarElementos(texto){
-    let paragrafo = document.createElement("p")
-    let node = document.createTextNode(texto)
-    paragrafo.appendChild(node)
-    let elemento = document.getElementById('console')
-    elemento.appendChild(paragrafo)
-}
-
 function numeroCaracteres(){
     let string = prompt("Insira um texto:")
     output('Número de caracteres da string "' + string + '": ' + string.length + ".")
@@ -98,5 +90,20 @@ function decomporSegundos(){
 }
 
 function cifra(){
-    
+    let string = prompt("Insira um texto:")
+    let vezes = parseInt(prompt("Quantas vezes deseja avançar?"))
+    let cifra = ""
+    for(var i = 0; i < string.length; i++) {
+        let caractere = string.charCodeAt(i);
+        if(caractere >= 97 && caractere <= 122) { //letras de a-z
+            cifra += String.fromCharCode((caractere - 97 + vezes) % 26 + 97);
+        } else if(caractere >= 65 && caractere <= 90) { //letras de A-Z
+            cifra += String.fromCharCode((caractere - 65 + vezes) % 26 + 65);
+        } else if(caractere >= 48 && caractere <= 57) { //números de 1-9
+            cifra += String.fromCharCode((caractere - 48 + vezes) % 10 + 48);
+        } else {
+            cifra += String.fromCharCode(caractere);
+        }
+    }
+    output(`"${string}" encriptada (${vezes} vezes): ${cifra}.`)
 }
