@@ -3,14 +3,6 @@ function output(texto){
     elemento.innerHTML = texto;
 }
 
-function adicionarElementos(texto){
-    let paragrafo = document.createElement("p")
-    let node = document.createTextNode(texto)
-    paragrafo.appendChild(node)
-    let elemento = document.getElementById('console')
-    elemento.appendChild(paragrafo)
-}
-
 function mediaElementos(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
     let soma = 0;
