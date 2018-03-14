@@ -53,3 +53,14 @@ input:hover{
     width: 86%;
     overflow: scroll;
 }
+
+textarea{
+    padding: 25px;
+    color:#4F844C;
+    background: #1E1E1E;
+    margin-top:10px;
+    height: 250px;
+    width: 80%;
+    resize: none;
+    overflow: scroll;
+}
