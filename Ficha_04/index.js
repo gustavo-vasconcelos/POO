@@ -1,15 +1,7 @@
 function output(texto){
     console.log(texto)
-    let elemento = document.getElementById('output')
-    elemento.innerHTML = texto
-}
-
-function adicionarElementos(texto){
-    let paragrafo = document.createElement("p")
-    let node = document.createTextNode(texto)
-    paragrafo.appendChild(node)
-    let elemento = document.getElementById('console')
-    elemento.appendChild(paragrafo)
+    let elemento = document.getElementById('output');
+    elemento.innerHTML += texto + "\n";
 }
 
 function listarPropriedades(){

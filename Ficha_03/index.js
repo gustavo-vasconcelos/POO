@@ -1,7 +1,7 @@
 function output(texto){
     console.log(texto)
     let elemento = document.getElementById('output');
-    elemento.innerHTML = texto;
+    elemento.innerHTML += texto + "\n";
 }
 
 function numeroCaracteres(){
