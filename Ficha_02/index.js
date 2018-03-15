@@ -1,7 +1,18 @@
 function output(texto){
+    console.log(texto)
     let elemento = document.getElementById('output');
-    elemento.innerHTML = texto;
+    elemento.innerHTML += texto + "\n";
 }
+
+function outputMesmaLinha(texto){
+    console.log(texto)
+    let elemento = document.getElementById('output');
+    elemento.innerHTML += texto + " ";
+}
+
+/*
+    ALÍNEA A
+*/
 
 function mediaElementos(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
@@ -12,9 +23,12 @@ function mediaElementos(){
         soma += array[i]
     }
     let media = soma/tamanho
-    console.log("Média dos " + tamanho + " elementos do array: " + media)
     output("Média dos " + tamanho + " elementos do array: " + media)
 }
+
+/*
+    ALÍNEA B
+*/
 
 function menorElemento(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
@@ -25,6 +39,10 @@ function menorElemento(){
     array.sort()
     output("Menor elemento do array: " + array[0] + ".")
 }
+
+/*
+    ALÍNEA C
+*/
 
 function semOcorrencias(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
@@ -38,9 +56,12 @@ function semOcorrencias(){
             array.splice(i, 1)
         }
     }
-    console.log("Elementos do array sem ocorrências do valor " + numeroRemover + ": " + array + ".")
     output("Elementos do array sem ocorrências do valor " + numeroRemover + ": " + array + ".")
 }
+
+/*
+    ALÍNEA D
+*/
 
 function concatenarArrays(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
@@ -50,9 +71,12 @@ function concatenarArrays(){
         array[i] = prompt("Insira o " + (i+1) + "º elemento:")
         string += array[i]
     }
-    console.log("Elementos do array concatenados: " + string)
     output("Elementos do array concatenados: " + string)
 }
+
+/*
+    ALÍNEA E
+*/
 
 function alfabeticamente(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
@@ -61,10 +85,12 @@ function alfabeticamente(){
         array[i] = prompt("Insira o " + (i+1) + "º elemento:")
     }
     array.sort()
-    console.log(array)
     output("Por ordem alfabética: " + array + ".")
-
 }
+
+/*
+    ALÍNEA F
+*/
 
 function reverse(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
@@ -74,9 +100,12 @@ function reverse(){
     }
     array.sort()
     array.reverse()
-    console.log("Por ordem alfabética reversa: " + array + ".")
     output("Por ordem alfabética reversa: " + array + ".")
 }
+
+/*
+    ALÍNEA G
+*/
 
 function maiorString(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
@@ -88,9 +117,12 @@ function maiorString(){
             maiorElemento = array[i]
         }
     }
-    console.log("Maior string: " + maiorElemento)
     output("Maior string: " + maiorElemento)
 }
+
+/*
+    ALÍNEA H
+*/
 
 function numeroOcorrencias(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
@@ -106,22 +138,27 @@ function numeroOcorrencias(){
             ocorrencias++
         }
     }
-    console.log("Número de ocorrências de " + string + " no array: " + ocorrencias + ".")
     output("Número de ocorrências de " + string + " no array: " + ocorrencias + ".")
 }
+
+/*
+    ALÍNEA I
+*/
 
 function password(){
     let array = []
     array[0] = prompt("Insira a password:")
     array[1] = prompt("Confirme a password:")
     if(array[0] == array[1]){
-        console.log("Match!")
         output("Match!")
     }else{
-        console.log("No match!")
         output("No match!")
     }
 }
+
+/*
+    ALÍNEA J
+*/
 
 function returnElemento(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
@@ -130,9 +167,12 @@ function returnElemento(){
         array[i] = prompt("Insira o " + (i+1) + "º elemento:")
     }
     let num = parseInt(prompt("Indique a posição do elemento a retornar:"))
-    console.log(num + "º posição do array: " + array[num] + ".")
     output(num + "º posição do array: " + array[num] + ".")
 }
+
+/*
+    ALÍNEA K
+*/
 
 function numerosPositivos(){
     let num = parseInt(prompt("Insira um número:"))
@@ -140,29 +180,32 @@ function numerosPositivos(){
     for(let i=0; i<num - 1; i++){
         array[i] = i+1
     }
-    console.log("Números no intervalo [1, " + num + "[ = " + array + ".")
     output("Números no intervalo [1, " + num + "[ = " + array + ".")
 }
+
+/*
+    ALÍNEA L
+*/
 
 function numerosPares(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
     let array = []
-    let array2 = []
     for(let i=0; i < tamanho; i++){
         array[i] = parseInt(prompt("Insira o " + (i+1) + "º elemento:"))
-        if(array[i] % 2 == 0){
-            array2.push(array[i])
-        }
     }
+
+    let array2 = array.filter(n => n % 2 == 0)
+
     if(array2.length != 0){
-        console.log("Array com elementos pares apenas: " + array2 + ".")
         output("Array com elementos pares apenas: " + array2 + ".")
     }else{
-        console.log("Não há elementos pares no array.")
         output("Não há elementos pares no array.")
     }
-    
 }
+
+/*
+    ALÍNEA M
+*/
 
 function incrementar1(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
@@ -170,11 +213,14 @@ function incrementar1(){
     for(let i=0; i < tamanho; i++){
         array[i] = parseInt(prompt("Insira o " + (i+1) + "º elemento:")) + 1
     }
-    console.log("Incrementado 1: " + array)
     output("Incrementado 1: " + array)
 }
 
-function somarArrays(){
+/*
+    ALÍNEA N
+*/
+
+function alineaN(){
     let tamanho = parseInt(prompt("Insira o tamanho do primeiro array:"))
     let array = []
     for(let i=0; i < tamanho; i++){
@@ -187,24 +233,26 @@ function somarArrays(){
         array2[i] = parseInt(prompt("Insira o " + (i+1) + "º elemento do segundo array:"))
     }
     console.log("Array 2: " + array2)
+    output(`Soma de cada elemento dos dois arrays: ${somarDoisArrays(array, array2)}.`)
+}
 
+function somarDoisArrays(array1, array2){
     let array3 = []
 
-    if(array.length >= array2.length){
+    if(array1.length >= array2.length){
         for(let i in array2){
-            array3[i] = array[i] + array2[i]
+            array3[i] = array1[i] + array2[i]
         }
-        for(let i=array2.length; i<array.length; i++){
-            array3.push(array[i])
+        for(let i=array2.length; i<array1.length; i++){
+            array3.push(array1[i])
         }
     }else{
-        for(let i in array){
-            array3[i] = array[i] + array2[i]
+        for(let i in array1){
+            array3[i] = array1[i] + array2[i]
         }
-        for(let i=array.length; i<array2.length; i++){
+        for(let i=array1.length; i<array2.length; i++){
             array3.push(array2[i])
         }
     }
-    console.log("Soma de cada elemento dos dois arrays: " + array3 + ".")
-    output("Soma de cada elemento dos dois arrays: " + array3 + ".")
+    return array3
 }
