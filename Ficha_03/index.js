@@ -89,9 +89,18 @@ function decomporSegundos(){
     output(`${tempo}s = ${horas}h + ${minutos}m + ${segundos}s`)
 }
 
-function cifra(){
+/*
+    ALÍNEA H
+*/
+
+function alineaH(){
     let string = prompt("Insira um texto:")
     let vezes = parseInt(prompt("Quantas vezes deseja avançar?"))
+    let resultado = encriptar(string, vezes)
+    output(`"${resultado[0]}" encriptada (${resultado[1]} vezes): ${resultado[2]}.`)
+}
+
+function encriptar(string, vezes){
     let cifra = ""
     for(var i = 0; i < string.length; i++) {
         let caractere = string.charCodeAt(i);
@@ -105,5 +114,5 @@ function cifra(){
             cifra += String.fromCharCode(caractere);
         }
     }
-    output(`"${string}" encriptada (${vezes} vezes): ${cifra}.`)
+    return [string, vezes, cifra]
 }
