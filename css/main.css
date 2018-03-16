@@ -40,19 +40,6 @@ input:hover{
     background-color: #8b9dc3;
 }
 
-#console{
-    color:#4F844C;
-    font-size: 25px;
-    padding:20px;
-    margin-top: 30px;
-    border: 3px solid white;
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.24), 0 1px 5px 0 rgba(0,0,0,0.19);	
-    background: #1E1E1E;
-    height: 250px;
-    width: 86%;
-    overflow: scroll;
-}
-
 textarea{
     text-align: center;
     font-size: 20px;
@@ -64,4 +51,5 @@ textarea{
     width: 80%;
     resize: none;
     overflow-y: scroll;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.24), 0 1px 5px 0 rgba(0,0,0,0.19);	
 }
