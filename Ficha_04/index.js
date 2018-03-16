@@ -130,7 +130,7 @@ function notasPositivasArray(array){
     ALÍNEA C
 */
 
-//c.1. & c.2.
+//c.1. & c.2. & c.3.
 
 function Carro(brand, plateNumber, color, fuelLevel, fuelType){
     this.brand = brand
@@ -141,23 +141,60 @@ function Carro(brand, plateNumber, color, fuelLevel, fuelType){
     this.changeColor = function(newColor){
         this.color = newColor
     }
-    //this.kilometers = 
-    
+    this.drivenDistance = function(kilometers){
+        let fuelLevel = (this.fuelLevel - (kilometers*51)/100).toFixed(1)
+        if(fuelLevel < 0){
+            output("Out of fuel!")
+        }else{
+            this.fuelLevel = fuelLevel
+        }
+    }
 }
 
 function alineaC1(){
     let carro1 = new Carro("Ford", "91-GH-15", "verde", 40, "Gasóleo")
     let carro2 = new Carro("Opel", "23-AB-23", "branco", 50, "Gasolina")
+    carro1.drivenDistance(20)
     output("Foram adicionados dois novos carros.")
 }
 
-//c.2.
+/*
+    ALÍNEA D
+*/
 
-function alineaC2(){
-    let carro = prompt("Qual o carro a alterar a cor?")
-    let cor = prompt("Qual a nova cor desejada?")
-    console.log(carro)
-    carro.changeColor("Preto")
-    console.log(carro)
+function Cilindro(altura, raio){
+    this.altura = altura
+    this.raio = raio
+    this.volume = function(){
+        return Math.PI*Math.pow(this.raio, 2)*this.altura
+    }
+}
 
+/*
+    ALÍNEA E
+*/
+
+function alineaE(){
+    let raio = parseInt(prompt("Insira o valor do raio:"))
+    var circulo = new Circulo(raio)
+    output("A = " + circulo.calcularArea() + "m." + "\nP = " + circulo.calcularPerimetro() + "m.")
+}
+
+function Circulo(raio){
+    this.raio = raio
+    this.calcularArea = function(){
+        return (Math.PI*Math.pow(raio, 2)).toFixed(2)
+    }
+    this.calcularPerimetro = function(){
+        return (2*Math.PI*this.raio).toFixed(2)
+    }
+}
+
+
+/*
+    ALÍNEA F
+*/
+
+String.prototype.initEnd = function(){
+    return this[0] + this[this.length - 1]
 }
