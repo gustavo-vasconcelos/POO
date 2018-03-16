@@ -132,29 +132,89 @@ function notasPositivasArray(array){
 
 //c.1. & c.2. & c.3.
 
-function Carro(brand, plateNumber, color, fuelLevel, fuelType){
-    this.brand = brand
-    this.plateNumber = plateNumber
-    this.color = color
-    this.fuelLevel = fuelLevel
-    this.fuelType = fuelType
+
+//resolução1
+/*function Carro(brand, plateNumber, color, fuelLevel, fuelType){
+    this._brand = brand
+    this._plateNumber = plateNumber
+    this._color = color
+    this._fuelLevel = fuelLevel
+    this._fuelType = fuelType
     this.changeColor = function(newColor){
-        this.color = newColor
+        this._color = newColor
     }
     this.drivenDistance = function(kilometers){
-        let fuelLevel = (this.fuelLevel - (kilometers*51)/100).toFixed(1)
+        let fuelLevel = (this._fuelLevel - (kilometers*51)/100).toFixed(1)
         if(fuelLevel < 0){
             output("Out of fuel!")
         }else{
-            this.fuelLevel = fuelLevel
+            this._fuelLevel = fuelLevel
+        }
+    }
+}*/
+
+
+//resolução2
+class Carro{
+    constructor(brand, plateNumber, color, fuelLevel, fuelType){
+        this._brand = brand
+        this._plateNumber = plateNumber
+        this._color = color
+        this._fuelLevel = fuelLevel
+        this._fuelType = fuelType
+    }
+
+    set brand(value){
+        this._brand = value
+    }
+    get brand(){
+        return this._brand
+    }
+
+    set plateNumber(value){
+        this._plateNumber = value
+    }
+    get plateNumber(){
+        return this._plateNumber
+    }
+
+    set color(value){
+        this._color = value
+    }
+    get color(){
+        return this._color
+    }
+
+    set fuelLevel(value){
+        this._fuelLevel = value
+    }
+    get fuelLevel(){
+        return this._fuelLevel
+    }
+
+    set fuelType(value){
+        this._fuelLevel = value
+    }
+    get fuelType(){
+        return this._fuelType
+    }
+
+    drivenDistance(kilometers){
+        let fuelLevel = (this._fuelLevel - (kilometers*51)/100).toFixed(1)
+        if(fuelLevel < 0){
+            output("Out of fuel!")
+        }else{
+            this._fuelLevel = fuelLevel
         }
     }
 }
 
+
+
+
 function alineaC1(){
     let carro1 = new Carro("Ford", "91-GH-15", "verde", 40, "Gasóleo")
     let carro2 = new Carro("Opel", "23-AB-23", "branco", 50, "Gasolina")
-    carro1.drivenDistance(20)
     output("Foram adicionados dois novos carros.")
 }
 
@@ -162,13 +222,42 @@ function alineaC1(){
     ALÍNEA D
 */
 
+
+/*resolução1
 function Cilindro(altura, raio){
-    this.altura = altura
-    this.raio = raio
+    this._altura = altura
+    this._raio = raio
     this.volume = function(){
-        return Math.PI*Math.pow(this.raio, 2)*this.altura
+        return Math.PI*Math.pow(this._raio, 2)*this._altura
+    }
+}*/
+
+//resolução2
+class Cilindro{
+    constructor(altura, raio){
+        this._altura = altura
+        this._raio = raio
+    }
+
+    set altura(value){
+        this._altura = value
+    }
+    get altura(){
+        return this._altura
+    }
+
+    set raio(value){
+        this._raio = value
+    }
+    get raio(){
+        return this._raio
+    }
+
+    volume(){
+        return (Math.PI*Math.pow(this._raio, 2)*this._altura).toFixed(1)
     }
 }
+
 
 /*
     ALÍNEA E
@@ -180,15 +269,41 @@ function alineaE(){
     output("A = " + circulo.calcularArea() + "m." + "\nP = " + circulo.calcularPerimetro() + "m.")
 }
 
+
+/*resolução1
+
 function Circulo(raio){
-    this.raio = raio
+    this._raio = raio
     this.calcularArea = function(){
         return (Math.PI*Math.pow(raio, 2)).toFixed(2)
     }
     this.calcularPerimetro = function(){
-        return (2*Math.PI*this.raio).toFixed(2)
+        return (2*Math.PI*this._raio).toFixed(2)
+    }
+}*/
+
+
+//resolução2
+class Circulo{
+    constructor(raio){
+        this._raio = raio
+    }
+
+    set raio(value){
+        this._raio = value
+    }
+    get raio(){
+        return this._raio
+    }
+
+    calcularArea(){
+        return (Math.PI*Math.pow(this._raio, 2)).toFixed(2)
+    }
+    calcularPerimetro(){
+        return (2*Math.PI*this._raio).toFixed(2)
     }
 }
+
 
 
 /*
