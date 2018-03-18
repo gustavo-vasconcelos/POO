@@ -4,10 +4,18 @@ function output(texto){
     elemento.innerHTML += texto + "\n";
 }
 
+/*
+    ALÍNEA A
+*/
+
 function numeroCaracteres(){
     let string = prompt("Insira um texto:")
     output('Número de caracteres da string "' + string + '": ' + string.length + ".")
 }
+
+/*
+    ALÍNEA B
+*/
 
 function nomeCompleto(){
     let nome = prompt("Insira o seu nome:")
@@ -15,19 +23,31 @@ function nomeCompleto(){
     output("Nome completo: " + apelido.toUpperCase() + ", " + nome.toUpperCase() + ".")
 }
 
-function numeroVogais(){
-    let string = prompt("Insira um texto:")
+/*
+    ALÍNEA C
+*/
+
+String.prototype.numeroVogais = function(){
     let vogais = ["a", "A", "e", "E", "i", "I", "o", "O", "u", "U"]
     let numeroVogais = 0
-    for(let i in string){
-        for(let j in vogais){
-            if(string.charAt(i) == vogais[j]){
+    for(let i = 0; i < this.length; i++){
+        vogais.forEach(vogal => {
+            if(this[i] === vogal){
                 numeroVogais++
             }
-        }
+        })
     }
-    output('Número de vogais encontradas em "' + string + '": ' + numeroVogais + ".")
+    return numeroVogais
 }
+
+function alineaC(){
+    let string = prompt("Insira um texto:")
+    output(`Número de vogais encontradas em "${string}": ${string.numeroVogais()}.`)
+}
+
+/*
+    ALÍNEA D
+*/
 
 function numeroPalavras(){
     let string = prompt("Insira um texto:")
@@ -47,14 +67,26 @@ function numeroPalavras(){
     }
 }
 
-function inverterString(){
-    let string = prompt("Insira um texto:")
+/*
+    ALÍNEA E
+*/
+
+String.prototype.reverse = function(){
     let stringInvertida = ""
-    for(let i in string){
-        stringInvertida += string.charAt(string.length - i - 1)
+    for(let i = 0; i < this.length; i++){
+        stringInvertida += this[this.length - i - 1]
     }
-    output("Invertido: " + stringInvertida + ".")
+    return stringInvertida
 }
+
+function alineaE(){
+    let string = prompt("Insira um texto:")
+    output("Invertido: " + string.reverse() + ".")
+}
+
+/*
+    ALÍNEA F
+*/
 
 function semOcorrenciasChar(){
     let string = prompt("Insira um texto:")
@@ -68,19 +100,21 @@ function semOcorrenciasChar(){
     output(`"${string}" sem ocorrências do caractere '${char}': ${stringFinal}.`)
 }
 
+/*
+    ALÍNEA G
+*/
+
 function decomporSegundos(){
     let tempo = parseInt(prompt("Insira o número de segundos:"))
     let segundos = tempo
 
-    while(segundos - 60 >= 0)
-    {
+    while(segundos - 60 >= 0){
         segundos -= 60
     }
 
     let minutos = (tempo - segundos)/60
 
-    while (minutos - 60 >= 0)
-    {
+    while (minutos - 60 >= 0){
         minutos -= 60
     }
 
