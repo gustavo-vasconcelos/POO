@@ -224,5 +224,5 @@ class Pais{
 function alinea5(){
     let paises = []
     let nomePais1 = prompt("Insira o nome do país 1:")
-    let pais1 = new Pais("Portugal",)
+   
 }
