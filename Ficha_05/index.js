@@ -10,9 +10,9 @@ function output(texto){
 
 class Retangulo{
     constructor(altura, largura, cor){
-        altura = (typeof altura === "undefined") ? 1 : altura
-        largura = (typeof largura === "undefined") ? 1 : largura
-        cor = (typeof cor === "undefined") ? "Branco" : cor
+        altura = (typeof altura !== "number" || altura < 1) ? 1 : altura
+        largura = (typeof largura !== "number" || largura < 1) ? 1 : largura
+        cor = (typeof cor !== "string" || cor) ? "Branco" : cor
 
         this._altura = altura
         this._largura = largura
@@ -20,14 +20,22 @@ class Retangulo{
     }
 
     set setAltura(value){
-        this._altura = value
+        if(typeof value !== "number" || value < 1){
+            console.log("Valor inválido para a altura.")
+        }else{
+            this._altura = value
+        }
     }
     get getAltura(){
         return this._altura
     }
 
     set setLargura(value){
-        this._largura = value
+        if(typeof value !== "number" || value < 1){
+            console.log("Valor inválido para a largura.")
+        }else{
+            this._largura = value
+        }
     }
     get getLargura(){
         return this._largura
@@ -63,13 +71,18 @@ function alinea1(){
 
 class Circulo{
     constructor(raio){
+        raio = (typeof value !== "number" || value < 1) ? 1 : raio
         this._raio = raio
     }
 
-    set raio(value){
-        this._raio = value
+    set setRaio(value){
+        if(typeof value !== "number" || value < 1){
+            console.log("Valor inválido para o raio.")
+        }else{
+            this._raio = value
+        }
     }
-    get raio(){
+    get getRaio(){
         return this._raio
     }
 
@@ -82,7 +95,11 @@ class Circulo{
     }
 
     aumentarRaio(percentagem){
-        this._raio += this._raio * (percentagem/100)
+        if(typeof percentagem !== "number" || percentagem < 1){
+            console.log("Insira uma percentagem positiva.")
+        }else{
+            this._raio += this._raio * (percentagem/100)
+        }
     }
 }
 
@@ -110,7 +127,7 @@ class Ventoinha{
 
     set setVelocidade(value){
         if(typeof value !== "number" || value < 1 || value > 3){
-            console.log("A velocidade só pode ser 1, 2 ou 3!")
+            console.log("A velocidade só pode ser 1, 2 ou 3.")
         }else{
             this._velocidade = value
         }
@@ -125,7 +142,7 @@ class Ventoinha{
 
     set setLigado(value){
         if(typeof value !== "boolean"){
-            console.log("Insira um valor booleano!")
+            console.log("Insira um valor booleano.")
         }else{
             this._ligado = value
         }
@@ -171,7 +188,7 @@ class Dado{
 
     set setValorFace(value){
         if(typeof value !== "number" || value < 1){
-            console.log("Valor inválido para a face do dado!")
+            console.log("Valor inválido para a face do dado.")
         }else{
             this._valorFace = value
         }
@@ -198,31 +215,87 @@ class Pais{
     }
 
     set setNome(value){
-        this._nome = value
+        if(typeof value !== "string" || value){
+            console.log("Valor inválido para o nome.")
+        }else{
+            this._nome = value
+        }
     }
     get getNome(){
         return this._nome
     }
 
     set setPopulacao(value){
-        this._populacao = value
+        if(typeof value !== "number" || value < 1){
+            console.log("Valor inválido para a população.")
+        }else{
+            this._populacao = value
+        }
     }
     get getPopulacao(){
         return this._populacao
     }
 
     set setArea(value){
-        this._area = value
+        if(typeof value !== "number" || value < 1){
+            console.log("Valor inválido para a área.")
+        }else{
+            this._area = value
+        }
     }
     get getArea(){
         return this._area
     }
 
+    get getDensidade(){
+        return (this._populacao/this._area).toFixed(1)
+    }
 
+
+    static getMaiorArea(array){
+        let maiorArea = 0, nome
+        for(let i in array){
+            if(array[i].getArea >= maiorArea){
+                maiorArea = array[i].getArea
+                nome = array[i].getNome
+            }
+        }
+        return [nome, maiorArea]
+    }
+
+    static getMaiorPopulacao(array){
+        let maiorPopulacao = 0, nome
+        for(let i in array){
+            if(array[i].getPopulacao >= maiorPopulacao){
+                maiorPopulacao = array[i].getPopulacao
+                nome = array[i].getNome
+            }
+        }
+        return [nome, maiorPopulacao]
+    }
+
+    static getMaiorDensidade(array){
+        let maiorDensidade = 0, nome
+        for(let i in array){
+            if(array[i].getDensidade >= maiorDensidade){
+                maiorDensidade = array[i].getDensidade
+                nome = array[i].getNome
+            }
+        }
+        return [nome, maiorDensidade]
+    }
 }
 
 function alinea5(){
     let paises = []
-    let nomePais1 = prompt("Insira o nome do país 1:")
-   
+    paises[0] = new Pais("Portugal", 10227352, 92256)
+    paises[1] = new Pais("Brasil", 207660929, 8515767)
+    paises[2] = new Pais("Estados Unidos da América", 308745538, 9371175)
+    paises[3] = new Pais("Inglaterra", 53012456, 130395)
+    paises[4] = new Pais("Alemanha", 82521700, 357051)
+    output(
+        `País com maior área: ${Pais.getMaiorArea(paises)[0]} (${Pais.getMaiorArea(paises)[1]} km^2).\n
+        País com maior população: ${Pais.getMaiorPopulacao(paises)[0]} (${Pais.getMaiorPopulacao(paises)[1]} hab.).\n
+        País com maior densidade: ${Pais.getMaiorDensidade(paises)[0]} (${Pais.getMaiorDensidade(paises)[1]} hab./km^2).`
+    )
 }
