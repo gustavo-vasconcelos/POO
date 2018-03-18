@@ -71,7 +71,7 @@ function alinea1(){
 
 class Circulo{
     constructor(raio){
-        raio = (typeof value !== "number" || value < 1) ? 1 : raio
+        raio = (typeof raio !== "number") ? 1 : raio
         this._raio = raio
     }
 
@@ -98,7 +98,7 @@ class Circulo{
         if(typeof percentagem !== "number" || percentagem < 1){
             console.log("Insira uma percentagem positiva.")
         }else{
-            this._raio += this._raio * (percentagem/100)
+            this._raio = this._raio + (this._raio * (percentagem/100))
         }
     }
 }
@@ -109,7 +109,7 @@ function alinea2g(){
     output(`Antes do aumento:\nRaio do círculo = ${raio}m\nÁrea do círculo = ${circulo.getArea()}m\nCircunferência = ${circulo.getCircunferencia()}m\n`)
     let percentagem = parseInt(prompt("Qual a percentagem de aumento do raio do círculo?"))
     circulo.aumentarRaio(percentagem)
-    output(`Depois do aumento de ${percentagem}% do raio:\nRaio do círculo = ${circulo.raio}m\nÁrea do círculo = ${circulo.getArea()}m\nCircunferência = ${circulo.getCircunferencia()}m`)
+    output(`Depois do aumento de ${percentagem}% do raio:\nRaio do círculo = ${circulo.getRaio}m\nÁrea do círculo = ${circulo.getArea()}m\nCircunferência = ${circulo.getCircunferencia()}m`)
 }
 
 /*
@@ -200,8 +200,14 @@ class Dado{
     rolar(){
         this._valorFace = Math.floor(Math.random()*this._quantidadeFaces)+1
     }
+    
 }
 
+function alinea4(){
+    let dado = new Dado()
+    dado.rolar()
+    output(`Dado rolado. Número da face: ${dado.getValorFace}.`)
+}
 
 /*
     ALÍNEA 5
