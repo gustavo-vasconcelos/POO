@@ -14,64 +14,68 @@ function outputMesmaLinha(texto){
     ALÍNEA A
 */
 
-function mediaElementos(){
+Array.prototype.average = function(){
+    return this.reduce((soma, numero) => soma + numero)/this.length
+}
+
+function alineaA(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
-    let soma = 0;
     let array = []
     for(let i=0; i < tamanho; i++){
         array[i] = parseInt(prompt("Insira o " + (i+1) + "º elemento:"))
-        soma += array[i]
     }
-    let media = soma/tamanho
-    output("Média dos " + tamanho + " elementos do array: " + media)
+    output(`Média dos ${tamanho} elementos do array: ${array.average()}`)
 }
 
 /*
     ALÍNEA B
 */
 
-function menorElemento(){
+Array.prototype.menorElemento = function(){
+    return this.reduce((soma, atual) => Math.min(soma, atual))
+}
+
+function alineaB(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
     let array = []
     for(let i=0; i < tamanho; i++){
         array[i] = parseInt(prompt("Insira o " + (i+1) + "º elemento:"))
     }
-    array.sort()
-    output("Menor elemento do array: " + array[0] + ".")
+    output(`Menor elemento do array: ${array.menorElemento()}.`)
 }
 
 /*
     ALÍNEA C
 */
+Array.prototype.semOcorrencias = function(numeroRemover){
+    return this.filter(elemento => elemento != numeroRemover)
+}
 
-function semOcorrencias(){
+function alineaC(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
     let array = []
     for(let i=0; i < tamanho; i++){
         array[i] = parseInt(prompt("Insira o " + (i+1) + "º elemento:"))
     }
     let numeroRemover = parseInt(prompt("Insira o valor a remover:"))
-    for(let i=array.length - 1; i >= 0; i--){
-        if(array[i] == numeroRemover){
-            array.splice(i, 1)
-        }
-    }
-    output("Elementos do array sem ocorrências do valor " + numeroRemover + ": " + array + ".")
+    output(`Elementos do array sem ocorrências do valor ${numeroRemover}: ${array.semOcorrencias(numeroRemover)}.`)
 }
 
 /*
     ALÍNEA D
 */
 
-function concatenarArrays(){
+function alineaD(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
     let array = []
-    let string = ""
     for(let i=0; i < tamanho; i++){
         array[i] = prompt("Insira o " + (i+1) + "º elemento:")
-        string += array[i]
     }
-    output("Elementos do array concatenados: " + string)
+    output("Elementos do array concatenados: " + concatenarArrays(array))
+}
+
+function concatenarArrays(array){
+    return array.reduce((soma, atual) => "" + soma + atual)
 }
 
 /*
@@ -107,38 +111,37 @@ function reverse(){
     ALÍNEA G
 */
 
-function maiorString(){
+function alineaG(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
-    let maiorElemento = ""
     let array = []
     for(let i=0; i < tamanho; i++){
         array[i] = prompt("Insira o " + (i+1) + "º elemento:")
-        if(array[i].length >= maiorElemento.length){
-            maiorElemento = array[i]
-        }
     }
-    output("Maior string: " + maiorElemento)
+    output("Maior string: " + maiorString(array))
+}
+
+function maiorString(array){
+    return array.reduce((a, b) => {
+        return a.length > b.length ? a : b
+    })
 }
 
 /*
     ALÍNEA H
 */
 
-function numeroOcorrencias(){
+function alineaH(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
     let array = []
     for(let i=0; i < tamanho; i++){
         array[i] = prompt("Insira o " + (i+1) + "º elemento:")
     }
     let string = prompt("Indique o elemento a procurar:")
-    let ocorrencias = 0
+    output(`Número de ocorrências de ${string} no array: ${numeroOcorrencias(array, string)}.`)    
+}
 
-    for(let i in array){
-        if(array[i] == string){
-            ocorrencias++
-        }
-    }
-    output("Número de ocorrências de " + string + " no array: " + ocorrencias + ".")
+function numeroOcorrencias(array, string){
+    return array.filter(elemento => elemento === string).length
 }
 
 /*
@@ -149,11 +152,8 @@ function password(){
     let array = []
     array[0] = prompt("Insira a password:")
     array[1] = prompt("Confirme a password:")
-    if(array[0] == array[1]){
-        output("Match!")
-    }else{
-        output("No match!")
-    }
+    let resultado = (array[0] === array[1]) ? "Match." : "No match."
+    output(resultado)
 }
 
 /*
@@ -187,33 +187,36 @@ function numerosPositivos(){
     ALÍNEA L
 */
 
-function numerosPares(){
+Array.prototype.getElementosPares = function(){
+    let array = this.filter(n => n % 2 === 0)
+    return array
+}
+
+function alineaL(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
     let array = []
     for(let i=0; i < tamanho; i++){
         array[i] = parseInt(prompt("Insira o " + (i+1) + "º elemento:"))
     }
 
-    let array2 = array.filter(n => n % 2 == 0)
-
-    if(array2.length != 0){
-        output("Array com elementos pares apenas: " + array2 + ".")
-    }else{
-        output("Não há elementos pares no array.")
-    }
+    let resultado = (array.some(elemento => elemento % 2 === 0)) ? `Elementos pares no array: ${array.getElementosPares()}` : "Não há elementos pares no array."
+    output(resultado)
 }
 
 /*
     ALÍNEA M
 */
-
-function incrementar1(){
+function alineaM(){
     let tamanho = parseInt(prompt("Insira o tamanho do array:"))
     let array = []
     for(let i=0; i < tamanho; i++){
-        array[i] = parseInt(prompt("Insira o " + (i+1) + "º elemento:")) + 1
+        array[i] = parseInt(prompt("Insira o " + (i+1) + "º elemento:"))
     }
-    output("Incrementado 1: " + array)
+    output(`Elementos após incremento de 1: ${incrementar(array)}`)
+}
+
+function incrementar(array){
+    return array.map(elemento => elemento + 1)
 }
 
 /*
