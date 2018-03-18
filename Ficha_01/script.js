@@ -296,7 +296,7 @@ function isCapicua(num){
 */
 
 function advinha(){
-    let aleatorio = Math.floor(Math.random(1) * 100)
+    let aleatorio = Math.floor(Math.random() * 100 + 1)
     console.log(aleatorio)
     let tentativas = 1
     let num
