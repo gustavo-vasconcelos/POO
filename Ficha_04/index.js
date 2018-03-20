@@ -11,7 +11,10 @@ function output(texto){
 let student = {
     name: "David Silva",
     course: "POO",
-    grade: "12"
+    grade: "12",
+    toString(){
+        return `Nome: ${this.name}\nDisciplina: ${this.course}\nNota: ${this.grade}`
+    }
 }
 
 //a.1.
@@ -20,13 +23,16 @@ function alineaA1(){
     output(`Nome das propriedades do objeto student: ${nomePropriedades(student)}`)
 }
 
+
+/*  resolução2
+
 function nomePropriedades(nomeObjeto){
     let frase = ""
     for(let i in nomeObjeto){
         frase += i + "\n"
     }
     return frase
-}
+}*/
 
 //a.2.
 
@@ -178,6 +184,7 @@ class Carro{
         return this._plateNumber
     }
 
+    //c.2.
     set color(value){
         this._color = value
     }

@@ -92,11 +92,14 @@ function semOcorrenciasChar(){
     let string = prompt("Insira um texto:")
     let stringFinal = string
     let char = prompt("Insira o caractere a remover:")
+
+    stringFinal.replace(/^[a-z0-9]+$/gi, "")
+/*
     for(let i=stringFinal.length; i>=0; i--){
         if(stringFinal.charAt(i) == char){
             stringFinal = stringFinal.replace(char, "")
         }
-    }
+    }*/
     output(`"${string}" sem ocorrências do caractere '${char}': ${stringFinal}.`)
 }
 
@@ -135,7 +138,7 @@ function alineaH(){
 }
 
 function encriptar(string, vezes){
-    let cifra = ""
+    /*let cifra = ""
     for(var i = 0; i < string.length; i++) {
         let caractere = string.charCodeAt(i);
         if(caractere >= 97 && caractere <= 122) { //letras de a-z
@@ -147,6 +150,10 @@ function encriptar(string, vezes){
         } else {
             cifra += String.fromCharCode(caractere);
         }
-    }
+    }*/
+
+    let cifra = string.replace(/[a-z]/gi, function(char) { 
+        return (char === 'z' || char === 'Z') ? 'a' : String.fromCharCode(char.charCodeAt() + 1);
+    });
     return [string, vezes, cifra]
 }
