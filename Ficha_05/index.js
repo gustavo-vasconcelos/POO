@@ -8,40 +8,52 @@ function output(texto){
     ALÍNEA 1
 */
 
-class Retangulo{
-    constructor(altura, largura, cor){
-        altura = (typeof altura !== "number" || altura < 1) ? 1 : altura
-        largura = (typeof largura !== "number" || largura < 1) ? 1 : largura
-        cor = (typeof cor !== "string" || cor) ? "Branco" : cor
+let cores = ["branco", "preto", "azul", "verde", "amarelo"]
 
-        this._altura = altura
-        this._largura = largura
-        this._cor = cor
+class Retangulo{
+    constructor(altura = 1, largura = 1, cor = "branco"){
+        this.altura = altura
+        this.largura = largura
+        this.cor = cor
     }
 
-    set setAltura(value){
+    set altura(value){
         if(typeof value !== "number" || value < 1){
             console.log("Valor inválido para a altura.")
         }else{
             this._altura = value
         }
     }
-    get getAltura(){
+    get altura(){
         return this._altura
     }
 
-    set setLargura(value){
+    set largura(value){
         if(typeof value !== "number" || value < 1){
             console.log("Valor inválido para a largura.")
         }else{
             this._largura = value
         }
     }
-    get getLargura(){
+    get largura(){
         return this._largura
     }
 
-    get getCor(){
+    set cor(value){
+        if(this.cor !== "undefined"){
+            if(typeof value === "string"){
+                if(cores.indexOf(value.toLowerCase()) != -1){
+                    this._cor = value
+                } else{
+                    console.log("Cor inválida")
+                }
+            }else{
+                console.log("Insira uma string!")
+            }
+        }
+            
+    }
+    get cor(){
         return this._cor
     }
 
@@ -58,10 +70,10 @@ function alinea1(){
     let retangulo1 = new Retangulo()
     let retangulo2 = new Retangulo(5, 10)
     output(
-        `Retângulo 1: altura = ${retangulo1.getAltura} / largura = ${retangulo1.getLargura} /
-        cor = ${retangulo1.getCor} / área = ${retangulo1.getArea()} / perímetro = ${retangulo1.getPerimetro()}\n
+        `Retângulo 1: altura = ${retangulo1.altura} / largura = ${retangulo1.largura} /
+        cor = ${retangulo1.cor} / área = ${retangulo1.getArea()} / perímetro = ${retangulo1.getPerimetro()}\n
         Retângulo 2: altura = ${retangulo2.getAltura} / largura = ${retangulo2.getLargura} /
-        cor = ${retangulo2.getCor} / área = ${retangulo2.getArea()} / perímetro = ${retangulo2.getPerimetro()}\n\n`
+        cor = ${retangulo2.cor} / área = ${retangulo2.getArea()} / perímetro = ${retangulo2.getPerimetro()}\n\n`
     )
 }
 
@@ -70,35 +82,34 @@ function alinea1(){
 */
 
 class Circulo{
-    constructor(raio){
-        raio = (typeof raio !== "number") ? 1 : raio
-        this._raio = raio
+    constructor(raio = 1){
+        this.raio = raio
     }
 
-    set setRaio(value){
+    set raio(value){
         if(typeof value !== "number" || value < 1){
             console.log("Valor inválido para o raio.")
         }else{
             this._raio = value
         }
     }
-    get getRaio(){
+    get raio(){
         return this._raio
     }
 
     getArea(){
-        return (Math.PI*Math.pow(this._raio, 2)).toFixed(2)
+        return (Math.PI*Math.pow(this.raio, 2)).toFixed(2)
     }
 
     getCircunferencia(){
-        return (2*Math.PI*this._raio).toFixed(2)
+        return (2*Math.PI*this.raio).toFixed(2)
     }
 
     aumentarRaio(percentagem){
         if(typeof percentagem !== "number" || percentagem < 1){
             console.log("Insira uma percentagem positiva.")
         }else{
-            this._raio = this._raio + (this._raio * (percentagem/100))
+            this.raio += this.raio * (percentagem/100)
         }
     }
 }
@@ -220,40 +231,40 @@ class Pais{
         this._area = area
     }
 
-    set setNome(value){
+    set nome(value){
         if(typeof value !== "string" || value){
             console.log("Valor inválido para o nome.")
         }else{
             this._nome = value
         }
     }
-    get getNome(){
+    get nome(){
         return this._nome
     }
 
-    set setPopulacao(value){
+    set populacao(value){
         if(typeof value !== "number" || value < 1){
             console.log("Valor inválido para a população.")
         }else{
             this._populacao = value
         }
     }
-    get getPopulacao(){
+    get populacao(){
         return this._populacao
     }
 
-    set setArea(value){
+    set area(value){
         if(typeof value !== "number" || value < 1){
             console.log("Valor inválido para a área.")
         }else{
             this._area = value
         }
     }
-    get getArea(){
+    get area(){
         return this._area
     }
 
-    get getDensidade(){
+    getDensidade(){
         return (this._populacao/this._area).toFixed(1)
     }
 
@@ -289,6 +300,16 @@ class Pais{
             }
         }
         return [nome, maiorDensidade]
+    }
+
+    static comparar(a, b) {
+        if(a.nome > b.nome){
+            return 1
+        } else if(a.nome < b.nome) {
+            return -1
+        } else{
+            return 0
+        }
     }
 }
 
