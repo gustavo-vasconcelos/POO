@@ -130,8 +130,8 @@ function alinea1(){
     let quantidade = prompt("Qual a quantidade de retângulos a criar?")
     alert("Agora insira as informações pedidas relativamente ao retângulo a criar.")
     for(let i = 0; i < quantidade; i++){
-        let altura = parseInt(prompt("Insira a altura do " + (i+1) + "º retângulo em metros:"))
-        let largura = parseInt(prompt("Insira a largura do " + (i+1) + "º retângulo em metros:"))
+        let altura = parseInt(prompt("Insira a altura do " + parseInt(i+1) + "º retângulo em metros:"))
+        let largura = parseInt(prompt("Insira a largura do " + parseInt(i+1) + "º retângulo em metros:"))
         let cor = prompt("Insira a cor do " + (i+1) + "º retângulo (cores disponíveis: " + cores.concat() + "):")
         retangulos.push(new Retangulo(altura, largura, cor))
     }
