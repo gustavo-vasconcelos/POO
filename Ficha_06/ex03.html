@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>POO - Javascript</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron mt-5 border">
+            <h1 class="text-primary text-center justify-content-center">Exercícios de POO - Ficha 06 (DOM)</h1>
+            <form class="mt-5 d-flex justify-content-center">
+                <div class="form-group col-sm-6">
+                    <label for="titulo">Título:</label>
+                    <input required type="text" id="titulo" maxlength="50" class="form-control mb-3" placeholder="Insira o título do filme">
+
+                    <label for="ano">Ano:</label>
+                    <input required type="number" min="1900" max="2018" id="ano" class="form-control mb-3" placeholder="Ano de lançamento do filme">
+
+                    <label for="genero">Género:</label>
+                    <select required class="form-control" id="genero">
+                        <option hidden value="">Selecione uma opção</option>
+                        <option>Terror</option>
+                        <option>Romance</option>
+                        <option>Animação</option>
+                        <option>Aventura</option>
+                        <option>Thriller</option>
+                        <option>Ação</option>
+                    </select>
+                    <br>
+                    <button type="submit" class="btn btn-primary w-100 mb-5" id="submeter">Submeter</button>
+                </div>
+            </form>
+
+            <div class="container col-sm-12 text-center">
+                <table class="table table-striped table-hover border">
+                    <thead class="thead-inverse|thead-default">
+                        <tr>
+                            <th><i class="fa fa-film"></i> Título</th>
+                            <th><i class="fa fa-calendar"></i> Ano</th>
+                            <th><i class="fa fa-info"></i> Género</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="filmes">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="ex03.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

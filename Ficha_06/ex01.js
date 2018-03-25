@@ -1,30 +1,20 @@
-function output(texto) {
-    console.log(texto)
-    let elemento = document.getElementById('output');
-    elemento.innerHTML += texto + "\n";
-}
-
 window.onload = function() {
-    boasVindas()
+    init()
 }
 
-function boasVindas() {
-    document.getElementsByTagName("p")[0].innerHTML = "Bem-vindo à minha página!"
-}
+function init() {
+    let texto = document.getElementById("texto")
+    let input = document.getElementById("input")
+    let btn = document.getElementById("btn")
 
-let btn = document.getElementById("btn")
+    texto.innerHTML = "Bem-vindo à minha página!"
 
-
-
-
-function boasVindasNome() {
-    if(document.getElementById("input").innerHTML === "") {
-        document.getElementsByTagName("p")[0].innerHTML = "Bem-vindo à minha página!"        
-    } else{
-        console.log(document.getElementById("input").innerHTML)
-        document.getElementsByTagName("p")[0].innerHTML = "Bem-vindo " + document.getElementById("input").innerHTML + "!"         
-    }
-}
-function validate() {
-
+    btn.addEventListener("click", function(){
+        if(input.value === "") {
+            texto.innerHTML = "Bem-vindo à minha página!"        
+        } else{
+            texto.innerHTML = "Bem-vindo " + input.value + "!"  
+            input.value = ""       
+        }
+    })
 }
