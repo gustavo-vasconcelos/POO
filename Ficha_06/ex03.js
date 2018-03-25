@@ -66,11 +66,13 @@ function atualizarTabela() {
     for (let i = 0; i < filmes.length; i++) {
         let tr = document.createElement("tr")
         tr.id = "filme." + i
+        let coluna0 = document.createElement("td")
         let coluna1 = document.createElement("td")
         let coluna2 = document.createElement("td")
         let coluna3 = document.createElement("td")
         let coluna4 = document.createElement("td")
 
+        let numero = document.createTextNode(i+1)
         let titulo = document.createTextNode(filmes[i].titulo)
         let ano = document.createTextNode(filmes[i].ano)
         let genero = document.createTextNode(filmes[i].genero)
@@ -86,17 +88,19 @@ function atualizarTabela() {
             atualizarTabela()
         })
 
+        tr.appendChild(coluna0)
         tr.appendChild(coluna1)
         tr.appendChild(coluna2)
         tr.appendChild(coluna3)
         tr.appendChild(coluna4)
 
+        coluna0.appendChild(numero)
         coluna1.appendChild(titulo)
         coluna2.appendChild(ano)
         coluna3.appendChild(genero)
         coluna4.appendChild(remover)
 
-        titulo.scope = "row"
+        numero.scope = "row"
 
         let element = document.getElementsByTagName("tbody")
         element[0].appendChild(tr)
