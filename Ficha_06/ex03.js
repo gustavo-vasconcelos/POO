@@ -77,12 +77,11 @@ function atualizarTabela() {
         let remover = document.createElement("button")
         remover.className = "close fa fa-times-circle"
 
-        remover.addEventListener("click", function() {
+        remover.addEventListener("click", function () {
             let id = remover.parentNode.parentNode.id
             let linha = document.getElementById(id)
             let index = filmes.indexOf(id.substring(6, id.length))
-            console.log(id.substring(6, id.length))
-                filmes.splice(id.substring(6, id.length), 1)
+            filmes.splice(id.substring(6, id.length), 1)
             linha.remove()
             atualizarTabela()
         })
