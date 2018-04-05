@@ -8,29 +8,25 @@ window.onload = function () {
 
     form.addEventListener("submit", function (event) {
         let erro = false
-        let msg = ""
+        let msg = "ERRO: "
 
-        let data = new Date()
-        let ano = data.getFullYear()
-        let mes = data.getMonth() + 1
-        let dia = data.getDate()
+        let dataHoje = new Date()
+        dataNascimento = new Date(dataNascimento.value)
 
-        if(dataNascimento)
+        if(dataNascimento > dataHoje){
+            erro = true
+            msg += "A data de nascimento é inválida.\n"
+        }
 
         if (password.value !== confirmarPassword.value) {
             erro = true
-            msg += "As passwords não coincidem.\n"
+            msg += "As passwords não coincidem."
             event.preventDefault()
         }
-
-
 
         if (erro) {
             alert(msg)
             event.preventDefault()
         }
     })
-
-
-
 }
