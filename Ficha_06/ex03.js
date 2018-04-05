@@ -34,18 +34,19 @@ window.onload = function () {
 let filmes = []
 
 function init() {
-    document.getElementById("submeter").addEventListener("click", function () {
+    document.getElementById("form").addEventListener("submit", function (event) {
         let tituloInput = document.getElementById("titulo")
         let anoInput = document.getElementById("ano")
         let generoInput = document.getElementById("genero")
 
         if (tituloInput.checkValidity() && anoInput.checkValidity() && generoInput.checkValidity()) {
             criarFilme(tituloInput.value, anoInput.value, generoInput.value)
-            tituloInput.value = ""
+            /*tituloInput.value = ""
             anoInput.value = ""
-            generoInput.value = ""
+            generoInput.value = ""*/
             atualizarTabela()
         }
+        event.preventDefault()
     })
 }
 
@@ -72,7 +73,7 @@ function atualizarTabela() {
         let coluna3 = document.createElement("td")
         let coluna4 = document.createElement("td")
 
-        let numero = document.createTextNode(i+1)
+        let numero = document.createTextNode(i + 1)
         let titulo = document.createTextNode(filmes[i].titulo)
         let ano = document.createTextNode(filmes[i].ano)
         let genero = document.createTextNode(filmes[i].genero)

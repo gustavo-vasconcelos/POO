@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>POO - Javascript</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron mt-5 border border-primary">
+            <h1 class="text-primary text-center justify-content-center">ESMAD RUNNING</h1>
+            <form class="mt-5 d-flex justify-content-center" id="form" autocomplete="on">
+                <div class="form-group col-sm-6">
+                    <label for="txtNome">Nome:</label>
+                    <input required type="text" id="txtNome" maxlength="50" class="form-control mb-3" autofocus>
+
+                    <label for="txtMorada">Morada:</label>
+                    <input type="text" id="txtMorada" class="form-control mb-3">
+
+
+                    <label for="txtCodigoPostal">Código postal:</label>
+                    <input type="number" min="1" max="9999" id="txtCodigoPostal1" placeholder="NNNN">
+                    -
+                    <input type="number" min="1" max="999" id="txtCodigoPostal2" placeholder="NNN" class="mb-3">
+                    <br>
+                    <label for="txtTelemovel">Telemóvel:</label>
+                    <input required type="number" min="900000000" max="999999999" id="txtTelemovel" class="form-control mb-3">
+
+                    <label for="txtNascimento">Data de nascimento:</label>
+                    <input type="date" id="txtNascimento" class="form-control mb-3">
+
+                    <div class="form-control">
+                        <label for="txtLocalidade">Localidade:</label>
+                        <input list="locais" class="ml-2 mb-4" type="text">
+                        <datalist id="locais">
+                            <option value="Porto"></option>
+                            <option value="Lisboa"></option>
+                            <option value="Faro"></option>
+                            <option value="Braga"></option>
+                            <option value="Coimbra"></option>
+                        </datalist>
+                    </div>
+
+                    <br>
+                    <div class="mb-3">
+                        <label>Género:</label>
+                        <label class="radio-inline ml-2"><input type="radio" id="masculino" name="genero"> Masculino</label>
+                        <label class="radio-inline ml-5"><input type="radio" id="feminino" name="genero"> Feminino</label>
+                    </div>
+
+                    <label for="txtEmail">Email:</label>
+                    <input required type="email" id="txtEmail" class="form-control mb-3" accesskey="e">
+
+                    <label for="txtUsername">Username:</label>
+                    <input required type="text" id="txtUsername" class="form-control mb-3">
+
+                    <label for="txtPassword">Password:</label>
+                    <input required type="password" id="txtPassword" class="form-control mb-3" autocomplete="off">
+
+                    <label for="txtPasswordConfirmar">Confirmar password:</label>
+                    <input required type="password" id="txtPasswordConfirmar" class="form-control mb-3" autocomplete="off">
+                    <label>Tamanho da camisola:</label>
+                    <div class="mb-3">
+                        <label class="radio-inline"><input type="radio" id="tamanhoS" name="tamanho"> S</label>
+                        <label class="radio-inline"><input type="radio" id="tamanhoM" name="tamanho" class="ml-5"> M</label>
+                        <label class="radio-inline"><input type="radio" id="tamanhoL" name="tamanho" class="ml-5"> L</label>
+                        <label class="radio-inline"><input type="radio" id="tamanhoXL" name="tamanho" class="ml-5"> XL</label>
+                    </div>
+
+                    <label for="txtPaginaPessoal">Página pessoal:</label>
+                    <input type="url" id="txtPaginaPessoal" class="form-control mb-3">
+
+                    <label for="txtNumeroSapatilha">Número de calçado:</label>
+                    <input type="number" min="30" max="50" id="txtNumeroSapatilha" class="form-control mb-3">
+
+                    <label>Desportos praticados:</label>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="optRunning" value="running">
+                        <label class="form-check-label" for="optRunning">Running</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="optCycling" value="Cycling">
+                        <label class="form-check-label" for="optCycling">Cycling</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="optNatacao" value="Natação">
+                        <label class="form-check-label" for="optNatacao">Natação</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="optFutebol" value="Futebol">
+                        <label class="form-check-label" for="optFutebol">Futebol</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-3">
+                        <input class="form-check-input" type="checkbox" id="optVela" value="Vela">
+                        <label class="form-check-label" for="optVela">Vela</label>
+                    </div>
+
+                    <label for="txtObs">Observações:</label>
+                    <textarea class="form-control mb-3" id="txtObs" cols="30" rows="10" style="resize:none"></textarea>
+
+
+                    <input type="reset" id="reset" class="form-control mb-3 btn-secondary" value="Limpar">
+
+                    <input type="submit" id="submeter" class="btn btn-primary w-100 mb-5">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="ex02.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
