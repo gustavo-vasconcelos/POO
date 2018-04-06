@@ -1,5 +1,3 @@
-console.log(Date())
-
 window.onload = function () {
     let form = document.getElementById("form")
     let password = document.getElementById("txtPassword")
