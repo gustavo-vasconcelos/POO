@@ -27,25 +27,15 @@ class Filme {
     }
 }
 
-window.onload = function () {
-    init()
-}
-
 let filmes = []
 
-function init() {
+window.onload = function () {
     document.getElementById("form").addEventListener("submit", function (event) {
         let tituloInput = document.getElementById("titulo")
         let anoInput = document.getElementById("ano")
         let generoInput = document.getElementById("genero")
-
-        if (tituloInput.checkValidity() && anoInput.checkValidity() && generoInput.checkValidity()) {
-            criarFilme(tituloInput.value, anoInput.value, generoInput.value)
-            /*tituloInput.value = ""
-            anoInput.value = ""
-            generoInput.value = ""*/
-            atualizarTabela()
-        }
+        criarFilme(tituloInput.value, anoInput.value, generoInput.value)
+        atualizarTabela()
         event.preventDefault()
     })
 }
@@ -55,7 +45,10 @@ function criarFilme(titulo, ano, genero) {
 }
 
 function atualizarTabela() {
-    let filmesTabela = document.getElementById("filmes")
+
+    // SOLUÇÃO 1
+
+    /*let filmesTabela = document.getElementById("filmes")
     for (let i in filmes) {
         try {
             filmesTabela.removeChild(filmesTabela.lastElementChild)
@@ -105,5 +98,46 @@ function atualizarTabela() {
 
         let element = document.getElementsByTagName("tbody")
         element[0].appendChild(tr)
+    }*/
+
+
+    // SOLUÇÃO 2 (MELHOR)
+
+
+    let str = `
+        <thead class="thead-light">
+            <tr>
+                <th>#</th>
+                <th><i class="fa fa-film"></i> Título</th>
+                <th><i class="fa fa-calendar"></i> Ano</th>
+                <th><i class="fa fa-info"></i> Género</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="filmes">
+     `
+
+    for (let i = 0; i < filmes.length; i++) {
+        str += `<tr>
+                    <td>${i + 1}</td>
+                    <td>${filmes[i].titulo}</td>
+                    <td>${filmes[i].ano}</td>
+                    <td>${filmes[i].genero}</td>
+                    <td>
+                        <a class='remover'><button class="btn btn-primary"><i class='fa fa-trash'></i></button></a>
+                    </td>
+                </tr>
+            </tbody>`
+    }
+
+    document.getElementById("tabelaFilmes").innerHTML = str
+
+    let btnRemover = document.getElementsByClassName("remover")
+
+    for (let i = 0; i < btnRemover.length; i++) {
+        btnRemover[i].addEventListener("click", function() {
+            filmes.splice(i, 1)
+            atualizarTabela()
+        })
     }
 }
