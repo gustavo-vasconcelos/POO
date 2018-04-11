@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>POO - Javascript</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron mt-5 border border-primary">
+            <h1 class="text-primary text-center justify-content-center">Personalidades da Computação</h1>
+            <form class="mt-5 d-flex justify-content-center" id="form" autocomplete="on">
+                <div class="form-group col-sm-6">
+                    <!--Nome-->
+                    <label for="inputNome">Nome:</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <input required autofocus type="text" class="form-control" id="inputNome">
+                    </div>
+
+                    <!--Ano de nascimento-->
+                    <label for="inputNascimento">Ano de nascimento:</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <input required type="number" max="2018" class="form-control" id="inputNascimento">
+                    </div>
+
+                    <!--Nacionalidade-->
+                    <label for="inputNacionalidade">Nacionalidade:</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-globe"></i>
+                            </span>
+                        </div>
+                        <select required class="form-control" id="inputNacionalidade">
+                            <option hidden value="">Selecione uma opção</option>
+                            <option>América</option>
+                            <option>Europa</option>
+                            <option>Ásia</option>
+                            <option>África</option>
+                            <option>Oceânia</option>
+                        </select>
+                    </div>
+
+                    <!--Principal obra/criação-->
+                    <label for="inputObra">Principal obra/criação:</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-star"></i>
+                            </span>
+                        </div>
+                        <input required autofocus type="text" class="form-control" id="inputObra">
+                    </div>
+
+                    <!--Link para foto-->
+                    <label for="inputFoto">Link para foto:</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-picture-o" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <input required autofocus type="url" class="form-control" id="inputFoto">
+                    </div>
+
+                    <!--Reset-->
+                    <input type="reset" id="btnReset" class="form-control mb-3 btn-secondary" value="Limpar">
+
+                    <!--Submeter-->
+                    <input type="submit" id="btnSubmeter" class="form-control btn btn-primary mb-5">
+                </div>
+            </form>
+
+
+
+        </div>
+    </div>
+    <script src="ex01.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
