@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Ficha nº 8 - Exercício 1</title>
+    <title>Ficha nº 8 - Exercício 2</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,14 +15,14 @@
 <body>
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-3">Aplicação de personalidades</h1>
-            <p class="lead">Gerir personalidades da computação</p>
+            <h1 class="display-3">Aplicação de registo de jogos</h1>
+            <p class="lead">Gerir jogos</p>
             <hr class="my-2">
             <form id="form">
                 <div class="form-row">
-                    <!--Nome-->
+                    <!--Nome do jogo-->
                     <div class="form-group col-md-6">
-                        <label for="inputNome">Nome:</label>
+                        <label for="inputNome">Nome do jogo:</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -33,55 +33,58 @@
                         </div>
                     </div>
 
-                    <!--Ano de nascimento-->
-                    <div class="form-group col-md-3">
-                        <label for="inputAno">Ano de nascimento:</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <input required type="number" min="1000" class="form-control" id="inputAno">
-                        </div>
-                    </div>
-
-                    <!--Nacionalidade-->
-                    <div class="form-group col-md-3">
-                        <label for="inputNacionalidade">Nacionalidade:</label>
+                    <!--Género-->
+                    <div class="form-group col-md-6">
+                        <label for="inputGenero">Género:</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
                                     <i class="fa fa-globe"></i>
                                 </span>
                             </div>
-                            <select required class="form-control" id="inputNacionalidade">
+                            <select required class="form-control" id="inputGenero">
                                 <option hidden value="">Selecione uma opção</option>
-                                <option>América</option>
-                                <option>Europa</option>
-                                <option>Ásia</option>
-                                <option>África</option>
-                                <option>Oceania</option>
+                                <option>Ação</option>
+                                <option>Aventura</option>
+                                <option>Estratégia</option>
+                                <option>RPG</option>
+                                <option>Desporto</option>
+                                <option>Corrida</option>
+                                <option>Simulação</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
+                
+                <!--Plataformas-->
                 <div class="form-row">
-                    <!--Principal obra/criação-->
                     <div class="form-group col-md-6">
-                        <label for="inputObra">Principal obra/criação:</label>
+                        <label>Plataforma:</label>
                         <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-star"></i>
-                                </span>
+                            <div class="form-check form-check-inline form-control">
+                                <label class="form-check-label mr-2 ml-3">
+                                    <input class="form-check-input" type="checkbox" name="plataforma" value="Steam"> Steam
+                                </label>
+                                <label class="form-check-label mr-2">
+                                    <input class="form-check-input" type="checkbox" name="plataforma" value="PS4"> PS4
+                                </label>
+                                <label class="form-check-label mr-2">
+                                    <input class="form-check-input" type="checkbox" name="plataforma" value="Mobile"> Mobile
+                                </label>
+                                <label class="form-check-label mr-2">
+                                    <input class="form-check-input" type="checkbox" name="plataforma" value="Xbox"> Xbox
+                                </label>
+                                <label class="form-check-label mr-2">
+                                    <input class="form-check-input" type="checkbox" name="plataforma" value="Wii"> Wii
+                                </label>
                             </div>
-                            <input required autofocus type="text" class="form-control" id="inputObra">
                         </div>
-                    </div>
 
-                    <!--Link para foto-->
+                    </div>
+                    
+
+                    <!--Link para capa-->
                     <div class="form-group col-md-6">
                         <label for="inputFoto">Link para foto:</label>
                         <div class="input-group">
@@ -99,8 +102,6 @@
                     <div class="form-group col-md-6">
                         <!--Reset-->
                         <input type="reset" id="btnReset" class="form-control btn-secondary" value="Limpar">
-
-
                     </div>
                     <div class="form-group col-md-6">
                         <!--Submeter-->
@@ -125,7 +126,7 @@
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <script src="ex01.js"></script>
+    <script src="ex02.js"></script>
 </body>
 
 </html>
