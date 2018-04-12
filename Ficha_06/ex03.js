@@ -128,6 +128,20 @@ function atualizarTabela() {
                     </td>
                 </tr>
             </tbody>`
+<<<<<<< HEAD
+    }
+
+    document.getElementById("tabelaFilmes").innerHTML = str
+
+    let btnRemover = document.getElementsByClassName("remover")
+
+    for (let i = 0; i < btnRemover.length; i++) {
+        btnRemover[i].addEventListener("click", function() {
+            filmes.splice(i, 1)
+            atualizarTabela()
+        })
+=======
+>>>>>>> 7a71e27508c61b1dc93ac99e22f3530c3717fabc
     }
 
     document.getElementById("tabelaFilmes").innerHTML = str
