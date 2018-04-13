@@ -53,7 +53,7 @@ window.onload = function () {
     let btnRemoverTodos = document.getElementById("btnRemoverTodos")
     let btnsAdicionais = document.getElementById("btnsAdicionais")
 
-    //esconde ou mostra os botões adicionais
+    //esconde ou mostra os botões adicionais (filtrar e remover todos os jogos)
     if (jogos.length !== 0) {
         btnsAdicionais.style.visibility = "visible"
     } else {
@@ -71,15 +71,29 @@ window.onload = function () {
     })
 
     form.addEventListener("submit", function (event) {
+        let erro = false        
+        let strErro = "ERRO: "
+
+        //verifica se já existe um jogo com o mesmo nome
+        for (let i = 0; i < jogos.length; i++) {
+            if(jogos[i].nome === nome.value) {
+                erro = true
+                strErro += "Já existe um jogo com o mesmo nome.\n"
+            }
+        }
+
         //verifica se pelo menos uma checkbox está selecionada
-        let erro = true
         let plataformas = []
         let checkboxes = document.getElementsByClassName("form-check-input")
         for (let i = 0; i < checkboxes.length; i++) {
             if (checkboxes[i].checked) {
-                erro = false
                 plataformas.push(checkboxes[i].value)
             }
+        }
+
+        if(plataformas.length === 0) {
+            erro = true
+            strErro += "Selecione pelo menos uma plataforma."
         }
 
         if (!erro) {
@@ -89,7 +103,7 @@ window.onload = function () {
             jogos.push(new Jogo(nome.value, genero, plataformas, urlCapa))
             atualizarTabela(filtrarGenero.value)
         } else {
-            alert("Selecione pelo menos uma plataforma.")
+            alert(strErro)
         }
 
         //previne submissão
@@ -109,7 +123,7 @@ window.onload = function () {
 
 
 function atualizarTabela(genero) {
-    let str = ` <thead class="thead-light">
+    let str = ` <thead class="thead-dark">
                     <tr>
                         <th>#</th>
                         <th><i class="fa fa-info"></i> Nome do jogo</th>
@@ -122,15 +136,16 @@ function atualizarTabela(genero) {
     for (let i = 0; i < jogos.length; i++) {
         if (jogos[i].genero === genero || genero === "Todos") {
             str += `<tbody>
-                    <tr>
+                    <tr id="${jogos[i].nome}">
                         <td scope="row">${(i + 1)}</td>
                         <td>${jogos[i].nome}</td>
                         <td>${jogos[i].genero}</td>
                         <td>${jogos[i].plataformas.concat()}</td>
                         <td>
-                            <button type="button" class="btn btn-primary editar col-3" data-toggle="modal" data-target="#modalEditar"><i class="fa fa-edit"></i></button>
-                            <button type="button" class="btn btn-dark info col-3" data-toggle="modal" data-target="#modalInfo"><i class="fa fa-info"></i></button>
-                            <button type="button" class="btn btn-danger remover col-3" data-toggle="modal" data-target="#modalRemover"><i class="fa fa-times-circle"></i></td></button>
+                            <button type="button" class="btn btn-primary editar" ><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-dark info" data-toggle="modal" data-target="#modalInfo"><i class="fa fa-search"></i></button>
+                            <button type="button" class="btn btn-danger remover" data-toggle="modal" data-target="#modalRemover"><i class="fa fa-times-circle"></i></button>
+                        </td>
                     </tr>`
         }
     }
@@ -138,135 +153,7 @@ function atualizarTabela(genero) {
 
     //adiciona os elementos à tabela
     tabela.innerHTML = str
-
-    //btn editar
-    let btnEditar = document.getElementsByClassName("editar")
-    for (let i = 0; i < btnEditar.length; i++) {
-        btnEditar[i].addEventListener("click", function() {
-            let modalStr = `
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Informações sobre o jogo</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <form id="form">
-                                <div class="form-row">
-                                    <!--Nome do jogo-->
-                                    <div class="form-group col-md-6">
-                                        <label for="inputNome">Nome do jogo:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-info" aria-hidden="true"></i>
-                                                </span>
-                                            </div>
-                                            <input required autofocus type="text" class="form-control" id="inputNome" value="${jogos[i].nome}">
-                                        </div>
-                                    </div>
     
-                                    <!--Género-->
-                                    <div class="form-group col-md-6">
-                                        <label for="inputGenero">Género:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-globe"></i>
-                                                </span>
-                                            </div>
-                                            <select required class="form-control" id="inputGeneroEditar">
-                                                <option hidden value="">Selecione uma opção</option>
-                                                <option value="Ação">Ação</option>
-                                                <option value="Aventura">Aventura</option>
-                                                <option value="Estratégia">Estratégia</option>
-                                                <option value="RPG">RPG</option>
-                                                <option value="Desporto">Desporto</option>
-                                                <option value="Corrida">Corrida</option>
-                                                <option value="Simulação">Simulação</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                
-                
-                                <!--Plataformas-->
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label>Plataforma:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-gamepad" aria-hidden="true"></i>
-                                                </span>
-                                            </div>
-                                            <div class="form-check form-check-inline form-control">
-                                                <label class="form-check-label mr-4 ml-4">
-                                                    <input class="form-check-input" type="checkbox" name="plataforma" value="Steam"> Steam
-                                                </label>
-                                                <label class="form-check-label mr-4">
-                                                    <input class="form-check-input" type="checkbox" name="plataforma" value="PS4" checked> PS4
-                                                </label>
-                                                <label class="form-check-label mr-4">
-                                                    <input class="form-check-input" type="checkbox" name="plataforma" value="Mobile"> Mobile
-                                                </label>
-                                                <label class="form-check-label mr-4">
-                                                    <input class="form-check-input" type="checkbox" name="plataforma" value="Xbox"> Xbox
-                                                </label>
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" name="plataforma" value="Wii"> Wii
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <!--Link para capa-->
-                                    <div class="form-group col-md-12">
-                                        <label for="inputCapa">Link para capa:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-picture-o" aria-hidden="true"></i>
-                                                </span>
-                                            </div>
-                                            <input required autofocus type="url" class="form-control" id="inputCapa" value="${jogos[i].urlCapa}">
-                                        </div>
-                                    </div>
-                                </div>
-                
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <!--Submeter-->
-                                        <input type="submit" class="form-control btn btn-primary" value="Atualizar informações">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
-            </div>`
-
-            let options = document.getElementsByTagName("option")
-            for (let j = 0; j < options.length; j++) {
-                if(options[j].value === jogos[i].genero) {
-                    options[j].selected = "true"
-                }
-                
-            }
-    
-            document.getElementById("modalEditar").innerHTML = modalStr
-        })
-        
-    }
-
-
     //btn info
     let btnInfo = document.getElementsByClassName("info")
     for (let i = 0; i < btnInfo.length; i++) {
@@ -329,7 +216,7 @@ function atualizarTabela(genero) {
             let confirmarRemover = document.getElementsByClassName("confirmarRemover")
             for (let j = 0; j < confirmarRemover.length; j++) {
                 confirmarRemover[j].addEventListener("click", function () {
-                    jogos.splice(j, 1)
+                    removerJogoId(btnRemover[i].parentNode.parentNode.id)
                     atualizarTabela(filtrarGenero.value)
                 })
 
@@ -343,5 +230,14 @@ function atualizarTabela(genero) {
     } else {
         btnsAdicionais.style.visibility = "hidden"
         tabela.innerHTML = ""
+    }
+}
+
+
+function removerJogoId(id) {
+    for (let i = 0; i < jogos.length; i++) {
+        if(jogos[i].nome === id) {
+            jogos.splice(i, 1)
+        }
     }
 }
