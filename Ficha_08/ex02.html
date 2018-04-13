@@ -18,6 +18,7 @@
             <h1 class="display-3">Aplicação de registo de jogos</h1>
             <p class="lead">Gerir jogos</p>
             <hr class="my-2">
+            <h4 id="editarTitulo"></h3>
             <form id="form">
                 <div class="form-row">
                     <!--Nome do jogo-->
@@ -29,7 +30,7 @@
                                     <i class="fa fa-info" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <input required autofocus type="text" class="form-control" id="inputNome" value="Grand Theft Auto V">
+                            <input required autofocus type="text" class="form-control" id="inputNome">
                         </div>
                     </div>
 
@@ -44,13 +45,13 @@
                             </div>
                             <select required class="form-control" id="inputGenero">
                                 <option hidden value="">Selecione uma opção</option>
-                                <option selected>Ação</option>
-                                <option>Aventura</option>
-                                <option>Estratégia</option>
-                                <option>RPG</option>
-                                <option>Desporto</option>
-                                <option>Corrida</option>
-                                <option>Simulação</option>
+                                <option value="Ação">Ação</option>
+                                <option value="Aventura">Aventura</option>
+                                <option value="Estratégia">Estratégia</option>
+                                <option value="RPG">RPG</option>
+                                <option value="Desporto">Desporto</option>
+                                <option value="Corrida">Corrida</option>
+                                <option value="Simulação">Simulação</option>
                             </select>
                         </div>
                     </div>
@@ -72,7 +73,7 @@
                                     <input class="form-check-input" type="checkbox" name="plataforma" value="Steam"> Steam
                                 </label>
                                 <label class="form-check-label mr-4">
-                                    <input class="form-check-input" type="checkbox" name="plataforma" value="PS4" checked> PS4
+                                    <input class="form-check-input" type="checkbox" name="plataforma" value="PS4"> PS4
                                 </label>
                                 <label class="form-check-label mr-4">
                                     <input class="form-check-input" type="checkbox" name="plataforma" value="Mobile"> Mobile
@@ -98,7 +99,7 @@
                                     <i class="fa fa-picture-o" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <input required autofocus type="url" class="form-control" id="inputCapa" value="https://images.g2a.com/newlayout/323x433/1x1x0/387a113709aa/59e5efeb5bafe304c4426c47">
+                            <input required autofocus type="url" class="form-control" id="inputCapa">
                         </div>
                     </div>
                 </div>
@@ -113,7 +114,6 @@
                         <input type="submit" class="form-control btn btn-primary">
                     </div>
                 </div>
-
 
                 <div class="form-row" id="btnsAdicionais">
                     <!--Filtrar por género-->
@@ -145,23 +145,28 @@
                 </div>
             </form>
 
-            <!-- Modal editar -->
-            <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true"></div>     
-
-            <!-- Modal info -->
-            <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true"></div>     
-
-            <!-- Modal remover -->
-            <div class="modal fade" id="modalRemover" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true"></div>
-
+            <!-- Modal -->
+            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modalTitulo"></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="modalBody"></div>
+                        <div class="modal-footer" id="modalFooter"></div>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Tabela -->
             <div class="table-responsive">
                 <table class="table table-striped table-hover" id="tabela"></table>
             </div>
-            
         </div>
     </div>
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
