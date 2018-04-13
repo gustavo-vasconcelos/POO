@@ -224,7 +224,7 @@ function atualizarTabela(genero) {
                     let options = document.getElementsByTagName("option")
                     for (let k = 0; k < options.length; k++) {
                         if (options[k].innerHTML === jogos[j].genero && options[k].parentNode.id != "filtrarGenero") { //tem que ser diferente de filtrarGenero
-                            options[k].selected = "true"                                                              //para não alterar o campo de filtrar
+                            options[k].selected = true                                                              //para não alterar o campo de filtrar
                         }
                     }
 
