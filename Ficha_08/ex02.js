@@ -47,6 +47,7 @@ jogos.push(new Jogo("Euro Truck Simulator 2", "Simulação", ["Steam"], "https:/
 jogos.push(new Jogo("CS: Global Offensive", "Ação", ["Steam"], "https://t.tudocdn.net/272612?w=646&h=284"))
 jogos.push(new Jogo("FIFA 18", "Desporto", ["PS4", "Xbox"], "https://media.contentapi.ea.com/content/dam/ea/easports/fifa/ultimate-team/campaigns/2018/home-page-toty/fifa18-homepage-topterhero-bg-xs.jpg"))
 jogos.push(new Jogo("Dark Souls 2", "RPG", ["Steam", "PS4", "Xbox"], "http://s2.glbimg.com/tm78drylG3OWIJ9o0lN4mNitOk0=/695x0/s.glbimg.com/po/tt2/f/original/2015/02/10/dark-souls-2-imagem-divulgacao.jpg"))
+jogos.push(new Jogo("NBA 2k18", "Desporto", ["Steam", "PS4", "Xbox"], "https://steamcdn-a.akamaihd.net/steam/apps/577800/header.jpg?t=1507660027"))
 
 
 let editarTitulo = document.getElementById("editarTitulo")
