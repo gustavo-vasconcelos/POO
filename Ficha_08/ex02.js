@@ -197,7 +197,7 @@ function atualizarTabela(genero) {
     for (let i = 0; i < jogos.length; i++) {
         if (jogos[i].genero === genero || genero === "Todos") {
             str += `<tbody>
-                    <tr id="${jogos[i].nome}">
+                    <tr id="${jogos[i].nome}" class="table-primary">
                         <td scope="row">${count}</td>
                         <td>${jogos[i].nome}</td>
                         <td>${jogos[i].genero}</td>
