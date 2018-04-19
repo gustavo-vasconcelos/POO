@@ -283,7 +283,6 @@ function atualizarTabela(genero) {
 
     //btn remover jogo
     let btnRemover = document.getElementsByClassName("remover")
-    let modalRemover = document.getElementById("modalRemover")
     for (let i = 0; i < btnRemover.length; i++) {
         //btn na linha respetiva a cada jogo
         btnRemover[i].addEventListener("click", function () {
