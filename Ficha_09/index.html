@@ -2,12 +2,13 @@
 <html lang="pt-pt">
 
 <head>
-    <title>Title</title>
+    <title>DreamTrips</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
@@ -26,18 +27,15 @@
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline btn-primary px-3" href="#sobre">Sobre</a>
+                        <a class="nav-link btn btn-outline btn-primary px-4" href="#sobre">Sobre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline btn-primary px-3" href="#catalogo">Catálogo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline btn-primary px-3" href="#contatos">Contatos</a>
+                        <a class="nav-link btn btn-outline btn-primary px-4" href="#catalogo">Catálogo</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline btn-primary px-3" href="#">Login</a>
+                        <a class="nav-link btn btn-outline btn-info px-3" data-toggle="modal" data-target="#modalLogin" id="btnLogin">Login</a>
                     </li>
                 </ul>
             </div>
@@ -81,8 +79,9 @@
             <br>
             <div class="jumbotron mt-5">
                 <h2 class="display-4 text-center">Sobre nós</h2>
-                <p class="lead mt-3">A <a class="marca">DreamTrips</a> é uma aplicação web onde poderá relatar as suas viagens de sonho e, assim, disponibilizar as
-                    suas experiências ao público geral. Faça login para ter acesso a todas as funcionalidades. Caso ainda
+                <p class="lead mt-3">A
+                    <a class="marca">DreamTrips</a> é uma aplicação web onde poderá relatar as suas viagens de sonho e, assim, disponibilizar
+                    as suas experiências ao público geral. Faça login para ter acesso a todas as funcionalidades. Caso ainda
                     não seja um membro, registe-se.</p>
             </div>
         </section>
@@ -92,58 +91,211 @@
         <section id="catalogo">
             <br>
             <h1 class="text-center display-4 mt-5">Catálogo</h1>
-            <div class="card-deck card-hover mt-4">
-                <div class="card">
-                    <img class="card-img-top" src="img/carousel1.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
-                            content is a little bit longer. This is a wider card with supporting text below as a natural
-                            lead-in to additional content. This content is a little bit longer.</p>
+            <div class="row">
+                <div class="card-deck card-hover mt-4 col-xl-12">
+                    <div class="card">
+                        <img class="card-img-top" src="img/carousel1.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                                content is a little bit longer. This is a wider card with supporting text below as a natural
+                                lead-in to additional content. This content is a little bit longer.</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+                    <div class="card">
+                        <img class="card-img-top" src="" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
-                            card has even longer content than the first to show that equal height action.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+                    <div class="card">
+                        <img class="card-img-top" src="" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                                card has even longer content than the first to show that equal height action.</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         <!-- Fim catálogo -->
-
-
-
     </div>
     <!-- Fim main container -->
+
+    <!-- Início modal login-->
+    <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Efetue o login:</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <form id="formLogin" autocomplete="on">
+                            <!-- email -->
+                            <div class="form-group">
+                                <label for="loginInputEmail">Email:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-at" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <input required autofocus type="email" class="form-control" id="loginInputEmail">
+                                </div>
+                            </div>
+                            <!-- /email -->
+
+                            <!-- password -->
+                            <div class="form-group">
+                                <label for="loginInputPassword">Password:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-key" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <input required type="password" class="form-control" id="loginInputPassword">
+                                </div>
+                            </div>
+                            <!-- /password -->
+                            <div class="text-center">
+                                <input type="submit" class="form-control btn btn-info col-6" id="loginBtnSubmit" value="Login">
+                            </div>
+                        </form>
+                        <br>
+                        <small>Sem conta? Registe-se <a href="#" id="btnRegistar" data-dismiss="modal" data-toggle="modal" data-target="#modalRegisto">aqui</a>.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fim modal login-->
+
+    <!-- Início modal registo-->
+    <div class="modal" id="modalRegisto" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Efetue o registo:</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <form id="formRegisto" autocomplete="on">
+                            <!-- nome -->
+                            <div class="form-group">
+                                <label for="registoInputNome">Nome:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-id-card" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <input required autofocus type="text" class="form-control" id="registoInputNome">
+                                </div>
+                            </div>
+                            <!-- /nome -->
+                            
+                            <!-- email -->
+                            <div class="form-group">
+                                <label for="registoInputEmail">Email:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-at" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <input required autofocus type="email" class="form-control" id="registoInputEmail">
+                                </div>
+                            </div>
+                            <!-- /email -->
+
+                            <div class="form-row">
+                                <!-- password -->
+                                <div class="form-group col-6">
+                                    <label for="registoInputPassword">Password:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-key" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <input required type="password" class="form-control" id="registoInputPassword">
+                                    </div>
+                                </div>
+                                <!-- /password -->
+
+                                <!-- confirmar password -->
+                                <div class="form-group col-6">
+                                    <label for="registoInputConfirmarPassword">Confimar password:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-key" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <input required type="password" class="form-control" id="registoInputConfirmarPassword">
+                                    </div>
+                                </div>
+                                <!-- /confirmar password -->
+                            </div>
+
+                            <div class="text-center">
+                                <input type="submit" class="form-control btn btn-info col-6" id="registoBtnSubmit" value="Registar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fim modal registo-->
+
+    <!-- Início modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitulo"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody"></div>
+                <div class="modal-footer" id="modalFooter"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Fim modal -->
 
     <!-- Início footer-->
     <footer class="page-footer font-small bg-primary mt-5">
         <div class="footer-copyright py-3 text-center text-light">
-             Todos os direitos reservados - <a class="marca">DreamTrips</a> © 2018
+            Todos os direitos reservados -
+            <a class="marca">DreamTrips</a> © 2018
         </div>
     </footer>
     <!-- Fim footer-->
 
     <!-- Optional JavaScript -->
+    <script src="js/index.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
