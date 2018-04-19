@@ -47,6 +47,14 @@ class Utilizador {
         return id
     }
 
+    static getNameById(id) {
+        for (let i in utilizadores) {
+            if (utilizadores[i].id === id) {
+                return utilizadores[i].nome
+            }
+        }
+    }
+
     static getPasswordById(id) {
         for (let i in utilizadores) {
             if (utilizadores[i].id === id) {
@@ -138,13 +146,20 @@ class Viagem {
     }
 }
 
+//regista utilizador teste
+utilizadores.push(new Utilizador("Gustavo Henrique", "9170196@esmad.ipp.pt", "123"))
+
+
+//esconde a user area
+let areaUtilizador = document.getElementById("areaUtilizador")
+areaUtilizador.style.visibility = "hidden"
 
 window.onload = function () {
     let idUtilizadorLogado = -1
     let logado = false
 
     //registo
-    let btnRegisto = document.getElementById("btnRegistar")    
+    let btnRegisto = document.getElementById("btnRegistar")
     let formRegisto = document.getElementById("formRegisto")
     let registoInputNome = document.getElementById("registoInputNome")
     let registoInputEmail = document.getElementById("registoInputEmail")
@@ -152,8 +167,8 @@ window.onload = function () {
     let registoInputConfirmarPassword = document.getElementById("registoInputConfirmarPassword")
     let registoBtnSubmit = document.getElementById("registoBtnSubmit")
 
-    //quando o btn registo é clicado limpa o form
-    btnRegisto.addEventListener("click", function() {
+    //quando o btn registo é clicado, limpa o form
+    btnRegisto.addEventListener("click", function () {
         formRegisto.reset()
     })
 
@@ -187,14 +202,14 @@ window.onload = function () {
 
 
     //login
-    let btnLogin = document.getElementById("btnLogin")    
+    let btnLogin = document.getElementById("btnLogin")
     let formLogin = document.getElementById("formLogin")
     let loginInputEmail = document.getElementById("loginInputEmail")
     let loginInputPassword = document.getElementById("loginInputPassword")
     let loginBtnSubmit = document.getElementById("loginBtnSubmit")
 
-    //quando o btn login é clicado limpa o form
-    btnLogin.addEventListener("click", function() {
+    //quando o btn login é clicado, limpa o form
+    btnLogin.addEventListener("click", function () {
         formLogin.reset()
     })
 
@@ -216,11 +231,147 @@ window.onload = function () {
             idUtilizadorLogado = id
             logado = true
             $('#modalLogin').modal('hide');
+            areaUtilizador.style.visibility = "visible"
+
+            let nome = Utilizador.getNameById(id)
+            if (nome.indexOf(" ") !== -1) {
+                //obtém o primeiro nome                            
+                nome = nome.substr(0, nome.indexOf(" "))
+            }
+            areaUtilizador.innerHTML = "Bem vindo, " + nome
+            btnLogin.style.visibility = "hidden"
         }
         event.preventDefault()
     })
 
+    //areaUtilizador
+    let formAdicionar = document.getElementById("formAdicionar")
+    let btnAdicionarViagem = document.getElementById("btnAdicionarViagem")
+    let btnLogout = document.getElementById("btnLogout")
 
+    //quando o btn add viagem é clicado, limpa o form
+    btnAdicionarViagem.addEventListener("click", function () {
+        formAdicionar.reset()
+    })
 
+    btnLogout.addEventListener("click", function () {
+        idUtilizadorLogado = -1
+        logado = false
+        areaUtilizador.style.visibility = "hidden"
+        btnLogin.style.visibility = "visible"
+    })
+
+    //form adicionar viagem
+    let adicionarInputTitulo = document.getElementById("adicionarInputTitulo")
+    let adicionarInputPais = document.getElementById("adicionarInputPais")
+    let adicionarInputData = document.getElementById("adicionarInputData")
+    let adicionarInputUrlFoto = document.getElementById("adicionarInputUrlFoto")
+    let adicionarInputPontuacao = document.getElementById("adicionarInputPontuacao")
+    let adicionarInputDescricao = document.getElementById("adicionarInputDescricao")
+
+    formAdicionar.addEventListener("submit", function (event) {
+        let dataHoje = new Date()
+        let dataInput = new Date(adicionarInputData.value)
+        if (dataInput > dataHoje) {
+            alert("ERRO: Data inválida.")
+        } else {
+            viagens.push(new Viagem(adicionarInputTitulo.value, adicionarInputPais.value,
+                adicionarInputData.value, adicionarInputUrlFoto.value, adicionarInputDescricao.value,
+                adicionarInputPontuacao.value, idUtilizadorLogado))
+            $('#modalAdicionar').modal('hide');
+        }
+        event.preventDefault()
+    })
 
 }
+
+
+//carrega os cards das viagens
+function mostrarViagens(idUtilizador = -1) {
+    let str = '<div class="card-deck card-hover mt-4">'
+
+    let count = 0
+    for (let i in viagens) {
+        if (viagens[i].idAutor === idUtilizador || idUtilizador === -1) {
+            let desc = viagens[i].descricao
+            //caso a descrição tenha mais de 50 char, corta-a
+            if(desc.length > 50) {
+                desc = desc.substr(0, desc.indexOf(" ", 50)) + "..."
+            }
+
+            if(count !== 3) {
+                str += `<div class="card">
+                            <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
+                            <div class="card-body">
+                                <h5 class="card-title">${viagens[i].titulo}</h5>
+                                <p class="card-text">${desc}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Adicionado por ${Utilizador.getNameById(viagens[i].idAutor)}</small>
+                            </div>
+                        </div>`
+                count++
+            } else {
+                count = 0
+                str += `</div>
+                        <div class="card-deck card-hover mt-2">
+                            <div class="card">
+                            <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
+                            <div class="card-body">
+                                <h5 class="card-title">${viagens[i].titulo}</h5>
+                                <p class="card-text">${desc}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Adicionado por ${Utilizador.getNameById(viagens[i].idAutor)}</small>
+                            </div>
+                        </div>`
+                count++
+            }                
+        }
+    }
+
+    str += "</div>"
+    document.getElementById("catalogoCards").innerHTML = str
+}
+
+
+/*
+
+<div class="card-deck card-hover mt-4">
+    <div class="card">
+        <img class="card-img-top" src="img/carousel1.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                content is a little bit longer. This is a wider card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+    </div>
+    <div class="card">
+        <img class="card-img-top" src="" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+    </div>
+    <div class="card">
+        <img class="card-img-top" src="" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
+                card has even longer content than the first to show that equal height action.</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+    </div>
+</div>
+
+
+*/

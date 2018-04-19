@@ -1,5 +1,5 @@
-nav a:hover {
-    color: #fff !important;
+textarea {
+    resize: none !important;
 }
 
 .marca {
