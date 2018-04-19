@@ -1,3 +1,45 @@
 nav a:hover {
     color: #fff !important;
 }
+
+.marca {
+    font-family: 'Pacifico', cursive;
+}
+
+@media only screen and (min-width: 576px) {
+    .card-hover .card:hover {
+        -webkit-transform:scale(1.05); /* Safari and Chrome */
+        -moz-transform:scale(1.05); /* Firefox */
+        -ms-transform:scale(1.05); /* IE 9 */
+        -o-transform:scale(1.05); /* Opera */
+        transform:scale(1.05);
+        transition: all .3s ease-in-out;
+    }
+
+    .card-hover .card:not(hover) {
+        -webkit-transform:scale(1); /* Safari and Chrome */
+        -moz-transform:scale(1); /* Firefox */
+        -ms-transform:scale(1); /* IE 9 */
+        -o-transform:scale(1); /* Opera */
+        transform:scale(1);
+        transition: all .3s ease-in-out;
+    }
+}
+
+.translate-hover:hover {
+    -webkit-transform:scale(1.15); /* Safari and Chrome */
+    -moz-transform:scale(1.15); /* Firefox */
+    -ms-transform:scale(1.15); /* IE 9 */
+    -o-transform:scale(1.15); /* Opera */
+    transform:scale(1.15);
+    transition: all .3s ease-in-out;
+}
+
+.translate-hover:not(hover) {
+    -webkit-transform:scale(1); /* Safari and Chrome */
+    -moz-transform:scale(1); /* Firefox */
+    -ms-transform:scale(1); /* IE 9 */
+    -o-transform:scale(1); /* Opera */
+    transform:scale(1);
+    transition: all .3s ease-out;
+}
