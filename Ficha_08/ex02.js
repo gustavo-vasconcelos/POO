@@ -54,7 +54,7 @@ let editarTitulo = document.getElementById("editarTitulo")
 let tabela = document.getElementById("tabela")
 let filtrarGenero = document.getElementById("filtrarGenero")
 let btnReset = document.getElementById("btnReset")
-
+let btnSubmeter = document.getElementById("btnSubmit")
 
 let inputNome = document.getElementById("inputNome")
 let checkboxes = document.getElementsByClassName("form-check-input")
@@ -90,6 +90,7 @@ window.onload = function () {
         editarTitulo.innerHTML = ""
         editar = false
         editarNome = ""
+        btnSubmeter.removeAttribute("value")
     })
 
     form.addEventListener("submit", function (event) {
@@ -153,6 +154,7 @@ window.onload = function () {
                         editar = false
                         editarNome = ""
                         editarTitulo.innerHTML = ""
+                        btnSubmeter.removeAttribute("value")
                         form.reset()
                     }
                 }
@@ -168,6 +170,10 @@ window.onload = function () {
 
     btnReset.addEventListener("click", function () {
         inputNome.focus()
+        editarTitulo.innerHTML = ""
+        editar = false
+        editarNome = ""
+        btnSubmeter.removeAttribute("value")
     })
 
     //caso haja mudança na combobox
@@ -191,7 +197,7 @@ function atualizarTabela(genero) {
     for (let i = 0; i < jogos.length; i++) {
         if (jogos[i].genero === genero || genero === "Todos") {
             str += `<tbody>
-                    <tr id="${jogos[i].nome}">
+                    <tr id="${jogos[i].nome}" class="table-primary">
                         <td scope="row">${count}</td>
                         <td>${jogos[i].nome}</td>
                         <td>${jogos[i].genero}</td>
@@ -246,6 +252,7 @@ function atualizarTabela(genero) {
                     editar = true
                     editarNome = jogos[j].nome
                     editarTitulo.innerHTML = `A editar ${jogos[j].nome}`
+                    btnSubmeter.value = "Atualizar"
                 }
             }
         })
@@ -276,7 +283,6 @@ function atualizarTabela(genero) {
 
     //btn remover jogo
     let btnRemover = document.getElementsByClassName("remover")
-    let modalRemover = document.getElementById("modalRemover")
     for (let i = 0; i < btnRemover.length; i++) {
         //btn na linha respetiva a cada jogo
         btnRemover[i].addEventListener("click", function () {
