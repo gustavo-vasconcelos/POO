@@ -144,11 +144,28 @@ class Viagem {
         }
         return ultimoId
     }
+
+    static removerViagemById(id) {
+        for (let i = 0; i < viagens.length; i++) {
+            if (viagens[i].id === id) {
+                viagens.splice(i, 1)
+            }
+        }               
+    }
 }
 
-//regista utilizador teste
-utilizadores.push(new Utilizador("Gustavo Henrique", "9170196@esmad.ipp.pt", "123"))
+//regista utilizadores teste
+utilizadores.push(new Utilizador("Gustavo Henrique", "teste@teste.pt", "123"))
+utilizadores.push(new Utilizador("Sou teste", "souteste@teste.pt", "123"))
 
+//regista viagem teste
+viagens.push(new Viagem("New York", "United States", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 1))
+viagens.push(new Viagem("Porto", "Portugal", "2018-04-04", "https://nit.pt/wp-content/uploads/2016/10/5a89980d-728f-4066-9f4c-a9c20338470b-754x394.jpg", "Top.", "10", 1))
+viagens.push(new Viagem("Paris", "France", "2018-04-04", "https://abrilviagemeturismo.files.wordpress.com/2016/10/paris-verao-franca.jpeg?quality=70&strip=info&w=920", "Top.", "10", 1))
+viagens.push(new Viagem("Londres", "United Kingdom", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 1))
+viagens.push(new Viagem("Londres", "United Kingdom", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 2))
+viagens.push(new Viagem("Londres", "United Kingdom", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 1))
+viagens.push(new Viagem("Londres", "United Kingdom", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 2))
 
 //esconde a user area
 let areaUtilizador = document.getElementById("areaUtilizador")
@@ -157,6 +174,9 @@ areaUtilizador.style.visibility = "hidden"
 window.onload = function () {
     let idUtilizadorLogado = -1
     let logado = false
+
+    //carrega as viagens que já estão registadas
+    mostrarViagens()
 
     //registo
     let btnRegisto = document.getElementById("btnRegistar")
@@ -240,6 +260,7 @@ window.onload = function () {
             }
             areaUtilizador.innerHTML = "Bem vindo, " + nome
             btnLogin.style.visibility = "hidden"
+            mostrarViagens(idUtilizadorLogado)
         }
         event.preventDefault()
     })
@@ -254,11 +275,13 @@ window.onload = function () {
         formAdicionar.reset()
     })
 
+    //btn logout clicado
     btnLogout.addEventListener("click", function () {
         idUtilizadorLogado = -1
         logado = false
         areaUtilizador.style.visibility = "hidden"
         btnLogin.style.visibility = "visible"
+        mostrarViagens()
     })
 
     //form adicionar viagem
@@ -281,8 +304,8 @@ window.onload = function () {
             $('#modalAdicionar').modal('hide');
         }
         event.preventDefault()
+        mostrarViagens(idUtilizadorLogado)
     })
-
 }
 
 
@@ -292,15 +315,49 @@ function mostrarViagens(idUtilizador = -1) {
 
     let count = 0
     for (let i in viagens) {
-        if (viagens[i].idAutor === idUtilizador || idUtilizador === -1) {
-            let desc = viagens[i].descricao
-            //caso a descrição tenha mais de 50 char, corta-a
-            if(desc.length > 50) {
-                desc = desc.substr(0, desc.indexOf(" ", 50)) + "..."
-            }
+        let desc = viagens[i].descricao
+        //caso a descrição tenha mais de 50 char, corta-a
+        if (desc.length > 50) {
+            desc = desc.substr(0, desc.indexOf(" ", 50)) + "..."
+        }
 
-            if(count !== 3) {
-                str += `<div class="card">
+        //caso o utilizador esteja logado
+        if (viagens[i].idAutor === idUtilizador) {
+            if (count !== 3) {
+                str += `<div class="card col-md-4" id="${viagens[i].id}">
+                            <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
+                            <div class="card-body">
+                                <h5 class="card-title">${viagens[i].titulo}</h5>
+                                <p class="card-text">${desc}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Adicionado por ${Utilizador.getNameById(viagens[i].idAutor)}</small>
+                                <button type="button" class="btn btn-danger remover pull-right" data-toggle="modal" data-target="#modalRemover"><i class="fa fa-times-circle"></i></button>
+                            </div>
+                        </div>`
+                count++
+            } else {
+                count = 0
+                str += `</div>
+                        <div class="card-deck card-hover mt-3">
+                            <div class="card col-md-4" id="${viagens[i].id}">
+                                <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${viagens[i].titulo}</h5>
+                                    <p class="card-text">${desc}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Adicionado por ${Utilizador.getNameById(viagens[i].idAutor)}</small>
+                                    <button type="button" class="btn btn-danger remover pull-right" data-toggle="modal" data-target="#modalRemover"><i class="fa fa-times-circle"></i></button>
+                                </div>
+                            </div>`
+                count++
+            }
+        }
+        //caso ninguém esteja logado
+        if (idUtilizador === -1) {
+            if (count !== 3) {
+                str += `<div class="card col-md-4" id="${viagens[i].id}">
                             <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
                             <div class="card-body">
                                 <h5 class="card-title">${viagens[i].titulo}</h5>
@@ -314,21 +371,53 @@ function mostrarViagens(idUtilizador = -1) {
             } else {
                 count = 0
                 str += `</div>
-                        <div class="card-deck card-hover mt-2">
-                            <div class="card">
-                            <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
-                            <div class="card-body">
-                                <h5 class="card-title">${viagens[i].titulo}</h5>
-                                <p class="card-text">${desc}</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">Adicionado por ${Utilizador.getNameById(viagens[i].idAutor)}</small>
-                            </div>
-                        </div>`
+                        <div class="card-deck card-hover mt-3">
+                            <div class="card col-md-4" id="${viagens[i].id}">
+                                <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${viagens[i].titulo}</h5>
+                                    <p class="card-text">${desc}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Adicionado por ${Utilizador.getNameById(viagens[i].idAutor)}</small>
+                                </div>
+                            </div>`
                 count++
-            }                
+            }
         }
     }
+    
+    let btnRemoverViagem = document.getElementsByClassName("remover")
+    console.log(btnRemoverViagem.length)
+    for (let i = 0; i < btnRemoverViagem.length; i++) {
+        console.log(true)
+    }
+
+    /*let modalRemoverBody = document.getElementById("modalRemoverBody")
+    for (let i = 0; i < btnRemoverViagem.length; i++) {
+        //btn na linha respetiva a cada jogo
+        console.log(true)
+        btnRemoverViagem[i].addEventListener("click", function () {
+            //btn confirmar a remoção na modal
+            let idViagem = btnRemover[i].parentNode.parentNode.id
+            console.log(idViagem)
+            for (let j = 0; j < viagens.length; j++) {
+                if (viagens[j].id === idViagem) {
+                    modalRemoverBody.innerHTML = "A viagem " + Viagem.getNameById(idViagem) + " será removida para sempre."
+                }
+            }
+
+            //btn confirmar remover na modal
+            let confirmarRemover = document.getElementsByClassName("confirmarRemover")
+            for (let j = 0; j < confirmarRemover.length; j++) {
+                confirmarRemover[j].addEventListener("click", function () {
+                    Viagem.removerViagemById(idViagem)
+                    mostrarViagens(idUtilizadorLogado)
+                })
+
+            }
+        })
+    }*/
 
     str += "</div>"
     document.getElementById("catalogoCards").innerHTML = str
