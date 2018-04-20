@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
 </head>
+
 <body class="bg-light">
     <!-- Início navbar -->
     <nav class="navbar navbar-expand-md navbar-light bg-primary fixed-top">
@@ -25,10 +26,10 @@
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline btn-primary px-4" href="#sobre">Sobre</a>
+                        <a class="nav-link btn btn-outline btn-primary px-4 text-light" href="#sobre">Sobre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline btn-primary px-4" href="#catalogo">Catálogo</a>
+                        <a class="nav-link btn btn-outline btn-primary px-4 text-light" href="#catalogo">Catálogo</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
@@ -36,7 +37,6 @@
                         <a class="nav-link dropdown-toggle btn btn-outline btn-info px-3" href="#" id="areaUtilizador" data-toggle="dropdown"></a>
                         <div class="dropdown-menu text-center bg-primary">
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalAdicionar" id="btnAdicionarViagem">Adicionar viagem</a>
-                            <a class="dropdown-item" href="#">Editar perfil</a>
                             <button type="button dropdown-item" class="w-100 btn btn-danger btn-danger-outline" id="btnLogout">Logout</button>
                         </div>
                     </li>
@@ -87,10 +87,33 @@
                 <br>
                 <div class="jumbotron mt-5 py-4">
                     <h2 class="display-4 text-center">Sobre nós</h2>
-                    <p class="lead mt-3">A
-                        <a class="marca">DreamTrips</a> é uma aplicação web onde poderá relatar as suas viagens de sonho e, assim, disponibilizar
+                    <p class="lead">A
+                        <a class="marca">DreamTrips</a> é uma spa <i>(single-page application)</i> que foi desenvolvida no âmbito da disciplina de Programação Orientada a Objetos, onde poderá relatar as suas viagens de sonho e, assim, disponibilizar
                         as suas experiências ao público geral. Faça login para ter acesso a todas as funcionalidades. Caso
                         ainda não seja um membro, registe-se.</p>
+                    <h3 class="display-4 text-center mt-5">Funcionalidades</h3>
+                    <ul class="lead">
+                        <li>Fazer registo (nome, email, password);</li>
+                        <li>Registar viagem (título, país, data, foto, descrição, pontuação), que posteriormente entrarão no catálogo abaixo em forma de card, contendo: 
+                            <ul>
+                                <li>Imagem no topo;</li>
+                                <li>O título da viagem;</li>
+                                <li>A descrição. Caso a descrição do objeto ultrapasse os 50 caracteres, são adicionadas reticências e as palavras subsequentes são omitidas;</li>
+                                <li>Nome do autor, no footer.</li>
+                            </ul>
+                        </li>
+                        <li>Ordenar as viagens do catálogo por:
+                            <ul>
+                                <li>Data ascendente (mais antigas);</li>
+                                <li>Data descendente (mais recentes);</li>
+                                <li>Título ascendente (ordem alfabética);</li>
+                                <li>Título descendente (ordem alfabética inversa);</li>
+                                <li>Autor (mostra apenas os utilizadores que são autores);</li>
+                                <li>País (mostra apenas os países que façam parte de uma viagem).</li>
+                            </ul>
+                        </li>
+                        <li>Remover viagem (apenas o autor o pode fazer).</li>
+                    </ul>
                 </div>
             </section>
             <!-- Fim sobre -->
@@ -112,8 +135,8 @@
                                     </span>
                                 </div>
                                 <select required class="form-control" id="inputOrdenar">
-                                    <option selected value="antigos">Data ascendente</option>
-                                    <option value="recentes">Data descendente</option>
+                                    <option selected value="dataAscendente">Data ascendente</option>
+                                    <option value="dataDescendente">Data descendente</option>
                                     <option value="tituloAscendente">Título ascendente</option>
                                     <option value="tituloDescendente">Título descendente</option>
                                 </select>

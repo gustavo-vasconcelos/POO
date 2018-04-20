@@ -160,20 +160,60 @@ class Viagem {
             }
         }
     }
+
+    static tituloAscendente(a, b) {
+        if (a.titulo.toLowerCase() > b.titulo.toLowerCase()) {
+            return 1
+        } else if (a.titulo.toLowerCase() < b.titulo.toLowerCase()) {
+            return -1
+        } else {
+            return 0
+        }
+    }
+
+    static tituloDescendente(a, b) {
+        if (a.titulo.toLowerCase() < b.titulo.toLowerCase()) {
+            return 1
+        } else if (a.titulo.toLowerCase() > b.titulo.toLowerCase()) {
+            return -1
+        } else {
+            return 0
+        }
+    }
+
+    static dataAscendente(a, b) {
+        if (a.data > b.data) {
+            return 1
+        } else if (a.data < b.data) {
+            return -1
+        } else {
+            return 0
+        }
+    }
+
+    static dataDescendente(a, b) {
+        if (a.data < b.data) {
+            return 1
+        } else if (a.data > b.data) {
+            return -1
+        } else {
+            return 0
+        }
+    }
 }
 
 //regista utilizadores teste
 utilizadores.push(new Utilizador("Gustavo Henrique", "teste@teste.pt", "123"))
-utilizadores.push(new Utilizador("Sou teste", "souteste@teste.pt", "123"))
+utilizadores.push(new Utilizador("Jane Doe", "janedoe@example.com", "123"))
 
 //regista viagem teste
 viagens.push(new Viagem("New York", "United States", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 1))
-viagens.push(new Viagem("Porto", "Portugal", "2018-04-04", "http://www.localporto.com/wp-content/uploads/ribeira-porto-unesco.jpg", "Top.", "10", 1))
-viagens.push(new Viagem("Paris", "France", "2018-04-04", "https://abrilviagemeturismo.files.wordpress.com/2016/10/paris-verao-franca.jpeg?quality=70&strip=info&w=920", "Top.", "10", 2))
-viagens.push(new Viagem("Londres", "United Kingdom", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 1))
-viagens.push(new Viagem("Londres", "United Kingdom", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 2))
-viagens.push(new Viagem("Londres", "United Kingdom", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 1))
-viagens.push(new Viagem("Londres", "United Kingdom", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 2))
+viagens.push(new Viagem("Porto", "Portugal", "2018-02-04", "http://www.localporto.com/wp-content/uploads/ribeira-porto-unesco.jpg", "Top.", "10", 1))
+viagens.push(new Viagem("Paris", "France", "2018-01-04", "https://abrilviagemeturismo.files.wordpress.com/2016/10/paris-verao-franca.jpeg?quality=70&strip=info&w=920", "Top.", "10", 2))
+viagens.push(new Viagem("Londres", "United Kingdom", "2017-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 1))
+viagens.push(new Viagem("Roma", "Italy", "2018-04-19", "https://2.bp.blogspot.com/-I5taHUuDqso/VWFbAoQXVSI/AAAAAAAAH4Y/exWIkQYLof0/s1600/coliseu-roma-italia.jpg", "Top.", "10", 2))
+viagens.push(new Viagem("Tóquio", "Japan", "2018-04-18", "https://cdn.cnn.com/cnnnext/dam/assets/170606110126-tokyo-skyline.jpg", "Top.", "10", 1))
+viagens.push(new Viagem("Rio de Janeiro", "Brazil", "2001-04-04", "https://cdn2.i-scmp.com/sites/default/files/images/methode/2018/01/30/e39be82e-04d5-11e8-82e3-6b95ccc67ee3_1320x770_174828.jpg", "Top.", "10", 2))
 
 //filtrar/ordenar viagens
 let inputOrdenar = document.getElementById("inputOrdenar")
@@ -187,10 +227,10 @@ let idUtilizadorLogado = -1
 let logado = false
 
 window.onload = function () {
-    //carrega as viagens que já estão registadas
-    mostrarViagens()
     //atualiza os filtros
     atualizarFiltros()
+    //carrega as viagens que já estão registadas
+    mostrarViagens()
 
     //registo
     let btnRegisto = document.getElementById("btnRegistar")
@@ -274,8 +314,8 @@ window.onload = function () {
             }
             areaUtilizador.innerHTML = "Bem vindo, " + nome
             btnLogin.style.visibility = "hidden"
-            mostrarViagens(idUtilizadorLogado)
             atualizarFiltros()
+            mostrarViagens(idUtilizadorLogado)
         }
         event.preventDefault()
     })
@@ -288,7 +328,6 @@ window.onload = function () {
     //quando o btn add viagem é clicado, limpa o form
     btnAdicionarViagem.addEventListener("click", function () {
         formAdicionar.reset()
-        atualizarFiltros()
     })
 
     //btn logout clicado
@@ -297,8 +336,8 @@ window.onload = function () {
         logado = false
         areaUtilizador.style.visibility = "hidden"
         btnLogin.style.visibility = "visible"
-        mostrarViagens()
         atualizarFiltros()
+        mostrarViagens()
     })
 
     //form adicionar viagem
@@ -324,23 +363,42 @@ window.onload = function () {
         mostrarViagens(idUtilizadorLogado)
     })
 
+    //filtros
     inputOrdenar.addEventListener("change", function () {
-
+        mostrarViagens()
     })
 
     inputFiltrarAutor.addEventListener("change", function () {
-
+        mostrarViagens(idUtilizadorLogado)
     })
 
     inputFiltrarPais.addEventListener("change", function () {
-
+        mostrarViagens(idUtilizadorLogado)
     })
 
 }
 
 
 //carrega os cards das viagens
-function mostrarViagens(idUtilizador = -1, autor = inputFiltrarAutor.value, pais = inputFiltrarPais.value) {
+function mostrarViagens(idUtilizador = -1, autor = inputFiltrarAutor.value, pais = inputFiltrarPais.value, ordem = inputOrdenar.value) {
+    //por ordem
+    switch (ordem) {
+        case "dataAscendente":
+            viagens.sort(Viagem.dataAscendente)
+            break;
+        case "dataDescendente":
+            viagens.sort(Viagem.dataDescendente)
+            break;
+        case "tituloAscendente":
+            console.log(true)        
+            viagens.sort(Viagem.tituloAscendente)
+            break;
+        case "tituloDescendente":
+            viagens.sort(Viagem.tituloDescendente)
+            break;
+    }
+
+
     let str = '<div class="card-deck card-hover mt-4">'
 
     let count = 0
@@ -352,7 +410,7 @@ function mostrarViagens(idUtilizador = -1, autor = inputFiltrarAutor.value, pais
         }
 
         //caso o utilizador esteja logado
-        if (viagens[i].idAutor === idUtilizador) {
+        if (viagens[i].idAutor === idUtilizador && (Utilizador.getNameById(viagens[i].idAutor) === autor) && (viagens[i].pais === pais || pais === "todos")) {
             if (count !== 3) {
                 str += `<div class="card col-md-4 p-0" id="${viagens[i].id}">
                             <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
@@ -386,7 +444,7 @@ function mostrarViagens(idUtilizador = -1, autor = inputFiltrarAutor.value, pais
         }
 
         //caso ninguém esteja logado
-        if (idUtilizador === -1) {
+        if (idUtilizador === -1 && (Utilizador.getNameById(viagens[i].idAutor) === autor || autor === "todos") && (viagens[i].pais === pais || pais === "todos")) {
             if (count !== 3) {
                 str += `<div class="card col-md-4 p-0" id="${viagens[i].id}">
                             <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
@@ -463,8 +521,8 @@ function mostrarViagens(idUtilizador = -1, autor = inputFiltrarAutor.value, pais
             for (let j = 0; j < confirmarRemover.length; j++) {
                 confirmarRemover[j].addEventListener("click", function () {
                     Viagem.removerViagemById(idViagem)
-                    mostrarViagens(idUtilizadorLogado)
                     atualizarFiltros()
+                    mostrarViagens(idUtilizadorLogado)
                 })
             }
         })
@@ -522,7 +580,7 @@ function atualizarFiltros() {
         //filtro de paises (apenas das viagens criadas pelo utilizador logado)
         let paises = []
         for (let i in viagens) {
-            if(viagens[i].idAutor === idUtilizadorLogado) {
+            if (viagens[i].idAutor === idUtilizadorLogado) {
                 paises.push(viagens[i].pais)
             }
         }
@@ -542,45 +600,3 @@ function atualizarFiltros() {
         inputFiltrarPais.innerHTML = str
     }
 }
-
-
-/*
-
-<div class="card-deck card-hover mt-4">
-    <div class="card">
-        <img class="card-img-top" src="img/carousel1.jpg" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
-                content is a little bit longer. This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-    </div>
-    <div class="card">
-        <img class="card-img-top" src="" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-    </div>
-    <div class="card">
-        <img class="card-img-top" src="" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This
-                card has even longer content than the first to show that equal height action.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-    </div>
-</div>
-
-
-*/
