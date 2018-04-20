@@ -387,6 +387,9 @@ function mostrarViagens(idUtilizador = -1) {
         }
     }
     
+    str += "</div>"
+    document.getElementById("catalogoCards").innerHTML = str
+
     let btnRemoverViagem = document.getElementsByClassName("remover")
     console.log(btnRemoverViagem.length)
     for (let i = 0; i < btnRemoverViagem.length; i++) {
@@ -418,9 +421,6 @@ function mostrarViagens(idUtilizador = -1) {
             }
         })
     }*/
-
-    str += "</div>"
-    document.getElementById("catalogoCards").innerHTML = str
 }
 
 
