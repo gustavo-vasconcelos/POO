@@ -145,12 +145,20 @@ class Viagem {
         return ultimoId
     }
 
+    static getNameById(id) {
+        for (let i in viagens) {
+            if (viagens[i].id === id) {
+                return viagens[i].titulo
+            }
+        }
+    }
+
     static removerViagemById(id) {
         for (let i = 0; i < viagens.length; i++) {
             if (viagens[i].id === id) {
                 viagens.splice(i, 1)
             }
-        }               
+        }
     }
 }
 
@@ -160,23 +168,29 @@ utilizadores.push(new Utilizador("Sou teste", "souteste@teste.pt", "123"))
 
 //regista viagem teste
 viagens.push(new Viagem("New York", "United States", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 1))
-viagens.push(new Viagem("Porto", "Portugal", "2018-04-04", "https://nit.pt/wp-content/uploads/2016/10/5a89980d-728f-4066-9f4c-a9c20338470b-754x394.jpg", "Top.", "10", 1))
-viagens.push(new Viagem("Paris", "France", "2018-04-04", "https://abrilviagemeturismo.files.wordpress.com/2016/10/paris-verao-franca.jpeg?quality=70&strip=info&w=920", "Top.", "10", 1))
+viagens.push(new Viagem("Porto", "Portugal", "2018-04-04", "http://www.localporto.com/wp-content/uploads/ribeira-porto-unesco.jpg", "Top.", "10", 1))
+viagens.push(new Viagem("Paris", "France", "2018-04-04", "https://abrilviagemeturismo.files.wordpress.com/2016/10/paris-verao-franca.jpeg?quality=70&strip=info&w=920", "Top.", "10", 2))
 viagens.push(new Viagem("Londres", "United Kingdom", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 1))
 viagens.push(new Viagem("Londres", "United Kingdom", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 2))
 viagens.push(new Viagem("Londres", "United Kingdom", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 1))
 viagens.push(new Viagem("Londres", "United Kingdom", "2018-04-04", "https://media-cdn.tripadvisor.com/media/photo-s/0e/9a/e3/1d/freedom-tower.jpg", "Top.", "10", 2))
+
+//filtrar/ordenar viagens
+let inputOrdenar = document.getElementById("inputOrdenar")
+let inputFiltrarAutor = document.getElementById("inputFiltrarAutor")
+let inputFiltrarPais = document.getElementById("inputFiltrarPais")
 
 //esconde a user area
 let areaUtilizador = document.getElementById("areaUtilizador")
 areaUtilizador.style.visibility = "hidden"
+let idUtilizadorLogado = -1
+let logado = false
 
 window.onload = function () {
-    let idUtilizadorLogado = -1
-    let logado = false
-
     //carrega as viagens que já estão registadas
     mostrarViagens()
+    //atualiza os filtros
+    atualizarFiltros()
 
     //registo
     let btnRegisto = document.getElementById("btnRegistar")
@@ -261,6 +275,7 @@ window.onload = function () {
             areaUtilizador.innerHTML = "Bem vindo, " + nome
             btnLogin.style.visibility = "hidden"
             mostrarViagens(idUtilizadorLogado)
+            atualizarFiltros()
         }
         event.preventDefault()
     })
@@ -273,6 +288,7 @@ window.onload = function () {
     //quando o btn add viagem é clicado, limpa o form
     btnAdicionarViagem.addEventListener("click", function () {
         formAdicionar.reset()
+        atualizarFiltros()
     })
 
     //btn logout clicado
@@ -282,6 +298,7 @@ window.onload = function () {
         areaUtilizador.style.visibility = "hidden"
         btnLogin.style.visibility = "visible"
         mostrarViagens()
+        atualizarFiltros()
     })
 
     //form adicionar viagem
@@ -306,11 +323,24 @@ window.onload = function () {
         event.preventDefault()
         mostrarViagens(idUtilizadorLogado)
     })
+
+    inputOrdenar.addEventListener("change", function () {
+
+    })
+
+    inputFiltrarAutor.addEventListener("change", function () {
+
+    })
+
+    inputFiltrarPais.addEventListener("change", function () {
+
+    })
+
 }
 
 
 //carrega os cards das viagens
-function mostrarViagens(idUtilizador = -1) {
+function mostrarViagens(idUtilizador = -1, autor = inputFiltrarAutor.value, pais = inputFiltrarPais.value) {
     let str = '<div class="card-deck card-hover mt-4">'
 
     let count = 0
@@ -324,7 +354,7 @@ function mostrarViagens(idUtilizador = -1) {
         //caso o utilizador esteja logado
         if (viagens[i].idAutor === idUtilizador) {
             if (count !== 3) {
-                str += `<div class="card col-md-4" id="${viagens[i].id}">
+                str += `<div class="card col-md-4 p-0" id="${viagens[i].id}">
                             <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
                             <div class="card-body">
                                 <h5 class="card-title">${viagens[i].titulo}</h5>
@@ -340,7 +370,7 @@ function mostrarViagens(idUtilizador = -1) {
                 count = 0
                 str += `</div>
                         <div class="card-deck card-hover mt-3">
-                            <div class="card col-md-4" id="${viagens[i].id}">
+                            <div class="card col-md-4 p-0" id="${viagens[i].id}">
                                 <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
                                 <div class="card-body">
                                     <h5 class="card-title">${viagens[i].titulo}</h5>
@@ -354,10 +384,11 @@ function mostrarViagens(idUtilizador = -1) {
                 count++
             }
         }
+
         //caso ninguém esteja logado
         if (idUtilizador === -1) {
             if (count !== 3) {
-                str += `<div class="card col-md-4" id="${viagens[i].id}">
+                str += `<div class="card col-md-4 p-0" id="${viagens[i].id}">
                             <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
                             <div class="card-body">
                                 <h5 class="card-title">${viagens[i].titulo}</h5>
@@ -371,8 +402,8 @@ function mostrarViagens(idUtilizador = -1) {
             } else {
                 count = 0
                 str += `</div>
-                        <div class="card-deck card-hover mt-3">
-                            <div class="card col-md-4" id="${viagens[i].id}">
+                        <div class="card-deck card-hover mt-4">
+                            <div class="card col-md-4 p-0" id="${viagens[i].id}">
                                 <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
                                 <div class="card-body">
                                     <h5 class="card-title">${viagens[i].titulo}</h5>
@@ -386,25 +417,42 @@ function mostrarViagens(idUtilizador = -1) {
             }
         }
     }
-    
+
+    //adicionados cards vazios e escondidos, para que o(s) elemento(s) da última linha fiquem sempre alinhados com os das linhas acima
+    switch (count) {
+        case 1:
+            str += `<div class="card col-md-4 p-0" style="visibility:hidden">
+                        <img class="card-img-top" src="" alt="">
+                            <div class="card-body"></div>
+                        <div class="card-footer"></div>
+                    </div>
+                    <div class="card col-md-4 p-0" style="visibility:hidden">
+                        <img class="card-img-top" src="" alt="">
+                            <div class="card-body"></div>
+                        <div class="card-footer"></div>
+                    </div>`
+            break;
+        case 2:
+            str += `<div class="card col-md-4 p-0" style="visibility:hidden">
+                        <img class="card-img-top" src="" alt="">
+                            <div class="card-body"></div>
+                        <div class="card-footer"></div>
+                    </div>`
+            break;
+    }
+
     str += "</div>"
+    //introduz os cards adicionados à div do catálogo
     document.getElementById("catalogoCards").innerHTML = str
 
     let btnRemoverViagem = document.getElementsByClassName("remover")
-    console.log(btnRemoverViagem.length)
-    for (let i = 0; i < btnRemoverViagem.length; i++) {
-        console.log(true)
-    }
-
-    /*let modalRemoverBody = document.getElementById("modalRemoverBody")
+    let modalRemoverBody = document.getElementById("modalRemoverBody")
     for (let i = 0; i < btnRemoverViagem.length; i++) {
         //btn na linha respetiva a cada jogo
-        console.log(true)
         btnRemoverViagem[i].addEventListener("click", function () {
             //btn confirmar a remoção na modal
-            let idViagem = btnRemover[i].parentNode.parentNode.id
-            console.log(idViagem)
-            for (let j = 0; j < viagens.length; j++) {
+            let idViagem = parseInt(btnRemoverViagem[i].parentNode.parentNode.id)
+            for (let j in viagens) {
                 if (viagens[j].id === idViagem) {
                     modalRemoverBody.innerHTML = "A viagem " + Viagem.getNameById(idViagem) + " será removida para sempre."
                 }
@@ -416,11 +464,83 @@ function mostrarViagens(idUtilizador = -1) {
                 confirmarRemover[j].addEventListener("click", function () {
                     Viagem.removerViagemById(idViagem)
                     mostrarViagens(idUtilizadorLogado)
+                    atualizarFiltros()
                 })
-
             }
         })
-    }*/
+    }
+}
+
+function atualizarFiltros() {
+    let str = ""
+
+    //caso nenhum utilizador esteja logado
+    if (idUtilizadorLogado === -1) {
+        //atualizar autores
+        let autores = []
+        for (let i in viagens) {
+            autores.push(Utilizador.getNameById(viagens[i].idAutor))
+        }
+
+        //sem repetições
+        let autoresNoRepeat = []
+        for (let i in autores) {
+            if (autoresNoRepeat.indexOf(autores[i]) === -1) {
+                autoresNoRepeat.push(autores[i])
+            }
+        }
+
+        str = '<option selected value="todos">Todos</option>'
+        for (let i in autoresNoRepeat) {
+            str += `<option value="${autoresNoRepeat[i]}">${autoresNoRepeat[i]}</option>`
+        }
+        inputFiltrarAutor.innerHTML = str
+
+        //atualiza países
+        let paises = []
+        for (let i in viagens) {
+            paises.push(viagens[i].pais)
+        }
+
+        //sem repetições
+        let paisesNoRepeat = []
+        for (let i in paises) {
+            if (paisesNoRepeat.indexOf(paises[i]) === -1) {
+                paisesNoRepeat.push(paises[i])
+            }
+        }
+
+        str = '<option selected value="todos">Todos</option>'
+        for (let i in paisesNoRepeat) {
+            str += `<option value="${paisesNoRepeat[i]}">${paisesNoRepeat[i]}</option>`
+        }
+        inputFiltrarPais.innerHTML = str
+    } else { //caso alguém esteja logado
+        //filtro de autores apenas com o nome do utilizador logado
+        inputFiltrarAutor.innerHTML = `<option selected value="${Utilizador.getNameById(idUtilizadorLogado)}">${Utilizador.getNameById(idUtilizadorLogado)}</option>`
+
+        //filtro de paises (apenas das viagens criadas pelo utilizador logado)
+        let paises = []
+        for (let i in viagens) {
+            if(viagens[i].idAutor === idUtilizadorLogado) {
+                paises.push(viagens[i].pais)
+            }
+        }
+
+        //sem repetições
+        let paisesNoRepeat = []
+        for (let i in paises) {
+            if (paisesNoRepeat.indexOf(paises[i]) === -1) {
+                paisesNoRepeat.push(paises[i])
+            }
+        }
+
+        str = '<option selected value="todos">Todos</option>'
+        for (let i in paisesNoRepeat) {
+            str += `<option value="${paisesNoRepeat[i]}">${paisesNoRepeat[i]}</option>`
+        }
+        inputFiltrarPais.innerHTML = str
+    }
 }
 
 

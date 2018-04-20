@@ -13,8 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
 </head>
-
-<body class="">
+<body class="bg-light">
     <!-- Início navbar -->
     <nav class="navbar navbar-expand-md navbar-light bg-primary fixed-top">
         <div class="container">
@@ -51,7 +50,7 @@
     <!-- Fim navbar -->
 
     <!-- Início main container -->
-    <div class="container">
+    <div class="container p-0 bg-white" id="main-container">
         <header>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -81,26 +80,87 @@
             </div>
         </header>
 
-        <!-- Início sobre -->
-        <section id="sobre">
-            <br>
-            <div class="jumbotron mt-5">
-                <h2 class="display-4 text-center">Sobre nós</h2>
-                <p class="lead mt-3">A
-                    <a class="marca">DreamTrips</a> é uma aplicação web onde poderá relatar as suas viagens de sonho e, assim,
-                    disponibilizar as suas experiências ao público geral. Faça login para ter acesso a todas as funcionalidades.
-                    Caso ainda não seja um membro, registe-se.</p>
-            </div>
-        </section>
-        <!-- Fim sobre -->
+        <!-- segundo container -->
+        <div class="container px-4">
+            <!-- Início sobre -->
+            <section id="sobre">
+                <br>
+                <div class="jumbotron mt-5 py-4">
+                    <h2 class="display-4 text-center">Sobre nós</h2>
+                    <p class="lead mt-3">A
+                        <a class="marca">DreamTrips</a> é uma aplicação web onde poderá relatar as suas viagens de sonho e, assim, disponibilizar
+                        as suas experiências ao público geral. Faça login para ter acesso a todas as funcionalidades. Caso
+                        ainda não seja um membro, registe-se.</p>
+                </div>
+            </section>
+            <!-- Fim sobre -->
 
-        <!-- Início catálogo -->
-        <section id="catalogo">
-            <br>
-            <h1 class="text-center display-4 mt-5">Catálogo</h1>
-            <div id="catalogoCards"></div>
-        </section>
-        <!-- Fim catálogo -->
+            <!-- Início catálogo -->
+            <section id="catalogo">
+                <br>
+                <h1 class="text-center display-4 mt-5">Catálogo</h1>
+                <br>
+                <!-- sort -->
+                <div class="container">
+                    <div class="form-row">
+                        <!-- ordenar -->
+                        <div class="form-group col-sm-12 col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-sort"></i>
+                                    </span>
+                                </div>
+                                <select required class="form-control" id="inputOrdenar">
+                                    <option selected value="antigos">Data ascendente</option>
+                                    <option value="recentes">Data descendente</option>
+                                    <option value="tituloAscendente">Título ascendente</option>
+                                    <option value="tituloDescendente">Título descendente</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- /ordenar -->
+
+                        <!-- autor -->
+                        <div class="form-group col-sm-12 col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-filter"></i>&nbsp;Autor:
+                                    </span>
+                                </div>
+                                <select required class="form-control" id="inputFiltrarAutor">
+                                    <option selected value="todos">Todos</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- /autor -->
+
+                        <!-- pais -->
+                        <div class="form-group col-sm-12 col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-filter"></i>&nbsp;País:
+                                    </span>
+                                </div>
+                                <select required class="form-control" id="inputFiltrarPais">
+                                    <option selected value="todos">Todos</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- /pais -->
+                    </div>
+                </div>
+                <!-- /sort -->
+                <div class="container p-4">
+                    <div id="catalogoCards"></div>
+                </div>
+            </section>
+            <!-- Fim catálogo -->
+        </div>
+        <!-- /segundo container -->
+
     </div>
     <!-- Fim main container -->
 
@@ -595,27 +655,27 @@
     </div>
     <!-- Fim modal adicionar viagem -->
 
-    <!-- Modal remover viagem
+    <!-- Modal remover viagem -->
     <div class="modal fade" id="modalRemover" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="modelTitleId">Deseja mesmo remover?</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modalRemoverBody"></div>
+                <div class="modal-body" id="modalRemoverBody"></div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger confirmarRemover" data-dismiss="modal">Remover</button>
+                    <button type="button" class="btn btn-danger confirmarRemover" data-dismiss="modal">Confirmar</button>
                 </div>
             </div>
         </div>
     </div>
-    -->
+
 
     <!-- Início footer-->
-    <footer class="page-footer font-small bg-primary mt-5">
+    <footer class="page-footer font-small bg-primary">
         <div class="footer-copyright py-3 text-center text-light">
             Todos os direitos reservados -
             <a class="marca">DreamTrips</a> © 2018
