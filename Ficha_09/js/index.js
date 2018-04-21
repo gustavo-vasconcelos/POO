@@ -63,6 +63,16 @@ class Utilizador {
         }
     }
 
+    static getIdByName(nome) {
+        let id = -1
+        for (let i in utilizadores) {
+            if (utilizadores[i].nome === nome) {
+                id = utilizadores[i].id
+            }
+        }
+        return id
+    }
+
     static getLastId() {
         let ultimoId = 0
         if (utilizadores.length > 0) {
@@ -369,6 +379,7 @@ window.onload = function () {
     })
 
     inputFiltrarAutor.addEventListener("change", function () {
+        atualizarFiltros(true)
         mostrarViagens(idUtilizadorLogado)
     })
 
@@ -390,7 +401,7 @@ function mostrarViagens(idUtilizador = -1, autor = inputFiltrarAutor.value, pais
             viagens.sort(Viagem.dataDescendente)
             break;
         case "tituloAscendente":
-            console.log(true)        
+            console.log(true)
             viagens.sort(Viagem.tituloAscendente)
             break;
         case "tituloDescendente":
@@ -529,50 +540,44 @@ function mostrarViagens(idUtilizador = -1, autor = inputFiltrarAutor.value, pais
     }
 }
 
-function atualizarFiltros() {
+function atualizarFiltros(autor = false) {
     let str = ""
 
     //caso nenhum utilizador esteja logado
     if (idUtilizadorLogado === -1) {
-        //atualizar autores
-        let autores = []
-        for (let i in viagens) {
-            autores.push(Utilizador.getNameById(viagens[i].idAutor))
-        }
-
-        //sem repetições
-        let autoresNoRepeat = []
-        for (let i in autores) {
-            if (autoresNoRepeat.indexOf(autores[i]) === -1) {
-                autoresNoRepeat.push(autores[i])
+        if (!autor) {
+            //atualizar autores
+            let autores = []
+            for (let i in viagens) {
+                if (autores.indexOf(Utilizador.getNameById(viagens[i].idAutor)) === -1) {
+                    autores.push(Utilizador.getNameById(viagens[i].idAutor))
+                }
             }
+
+            str = '<option selected value="todos">Todos</option>'
+            for (let i in autores) {
+                str += `<option value="${autores[i]}">${autores[i]}</option>`
+            }
+            inputFiltrarAutor.innerHTML = str
         }
 
-        str = '<option selected value="todos">Todos</option>'
-        for (let i in autoresNoRepeat) {
-            str += `<option value="${autoresNoRepeat[i]}">${autoresNoRepeat[i]}</option>`
-        }
-        inputFiltrarAutor.innerHTML = str
 
-        //atualiza países
+        //atualiza países (apenas mostra países de viagens do autor selecionado na combobox)
         let paises = []
         for (let i in viagens) {
-            paises.push(viagens[i].pais)
-        }
-
-        //sem repetições
-        let paisesNoRepeat = []
-        for (let i in paises) {
-            if (paisesNoRepeat.indexOf(paises[i]) === -1) {
-                paisesNoRepeat.push(paises[i])
+            if ((viagens[i].idAutor === Utilizador.getIdByName(inputFiltrarAutor.value) || inputFiltrarAutor.value === "todos")) {
+                if (paises.indexOf(viagens[i].pais) === -1) {
+                    paises.push(viagens[i].pais)
+                }
             }
         }
 
         str = '<option selected value="todos">Todos</option>'
-        for (let i in paisesNoRepeat) {
-            str += `<option value="${paisesNoRepeat[i]}">${paisesNoRepeat[i]}</option>`
+        for (let i in paises) {
+            str += `<option value="${paises[i]}">${paises[i]}</option>`
         }
         inputFiltrarPais.innerHTML = str
+
     } else { //caso alguém esteja logado
         //filtro de autores apenas com o nome do utilizador logado
         inputFiltrarAutor.innerHTML = `<option selected value="${Utilizador.getNameById(idUtilizadorLogado)}">${Utilizador.getNameById(idUtilizadorLogado)}</option>`
