@@ -410,9 +410,8 @@ function mostrarViagens(idUtilizador = -1, autor = inputFiltrarAutor.value, pais
     }
 
 
-    let str = '<div class="card-deck card-hover mt-4">'
+    let str = ""
 
-    let count = 0
     for (let i in viagens) {
         let desc = viagens[i].descricao
         //caso a descrição tenha mais de 50 char, corta-a
@@ -422,8 +421,8 @@ function mostrarViagens(idUtilizador = -1, autor = inputFiltrarAutor.value, pais
 
         //caso o utilizador esteja logado
         if (viagens[i].idAutor === idUtilizador && (Utilizador.getNameById(viagens[i].idAutor) === autor) && (viagens[i].pais === pais || pais === "todos")) {
-            if (count !== 3) {
-                str += `<div class="card col-md-4 p-0" id="${viagens[i].id}">
+            str += `<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mt-4 card-hover">
+                        <div class="card" id="${viagens[i].id}">
                             <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
                             <div class="card-body">
                                 <h5 class="card-title">${viagens[i].titulo}</h5>
@@ -433,31 +432,14 @@ function mostrarViagens(idUtilizador = -1, autor = inputFiltrarAutor.value, pais
                                 <small class="text-muted">Adicionado por ${Utilizador.getNameById(viagens[i].idAutor)}</small>
                                 <button type="button" class="btn btn-danger remover pull-right" data-toggle="modal" data-target="#modalRemover"><i class="fa fa-times-circle"></i></button>
                             </div>
-                        </div>`
-                count++
-            } else {
-                count = 0
-                str += `</div>
-                        <div class="card-deck card-hover mt-3">
-                            <div class="card col-md-4 p-0" id="${viagens[i].id}">
-                                <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
-                                <div class="card-body">
-                                    <h5 class="card-title">${viagens[i].titulo}</h5>
-                                    <p class="card-text">${desc}</p>
-                                </div>
-                                <div class="card-footer">
-                                    <small class="text-muted">Adicionado por ${Utilizador.getNameById(viagens[i].idAutor)}</small>
-                                    <button type="button" class="btn btn-danger remover pull-right" data-toggle="modal" data-target="#modalRemover"><i class="fa fa-times-circle"></i></button>
-                                </div>
-                            </div>`
-                count++
-            }
+                        </div>
+                    </div>`
         }
 
         //caso ninguém esteja logado
         if (idUtilizador === -1 && (Utilizador.getNameById(viagens[i].idAutor) === autor || autor === "todos") && (viagens[i].pais === pais || pais === "todos")) {
-            if (count !== 3) {
-                str += `<div class="card col-md-4 p-0" id="${viagens[i].id}">
+            str += `<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mt-4 card-hover">
+                        <div class="card" id="${viagens[i].id}">
                             <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
                             <div class="card-body">
                                 <h5 class="card-title">${viagens[i].titulo}</h5>
@@ -466,51 +448,10 @@ function mostrarViagens(idUtilizador = -1, autor = inputFiltrarAutor.value, pais
                             <div class="card-footer">
                                 <small class="text-muted">Adicionado por ${Utilizador.getNameById(viagens[i].idAutor)}</small>
                             </div>
-                        </div>`
-                count++
-            } else {
-                count = 0
-                str += `</div>
-                        <div class="card-deck card-hover mt-4">
-                            <div class="card col-md-4 p-0" id="${viagens[i].id}">
-                                <img class="card-img-top" src="${viagens[i].urlFoto}" alt="${viagens[i].titulo}">
-                                <div class="card-body">
-                                    <h5 class="card-title">${viagens[i].titulo}</h5>
-                                    <p class="card-text">${desc}</p>
-                                </div>
-                                <div class="card-footer">
-                                    <small class="text-muted">Adicionado por ${Utilizador.getNameById(viagens[i].idAutor)}</small>
-                                </div>
-                            </div>`
-                count++
-            }
+                        </div>
+                    </div>`
         }
     }
-
-    //adicionados cards vazios e escondidos, para que o(s) elemento(s) da última linha fiquem sempre alinhados com os das linhas acima
-    switch (count) {
-        case 1:
-            str += `<div class="card col-md-4 p-0" style="visibility:hidden">
-                        <img class="card-img-top" src="" alt="">
-                            <div class="card-body"></div>
-                        <div class="card-footer"></div>
-                    </div>
-                    <div class="card col-md-4 p-0" style="visibility:hidden">
-                        <img class="card-img-top" src="" alt="">
-                            <div class="card-body"></div>
-                        <div class="card-footer"></div>
-                    </div>`
-            break;
-        case 2:
-            str += `<div class="card col-md-4 p-0" style="visibility:hidden">
-                        <img class="card-img-top" src="" alt="">
-                            <div class="card-body"></div>
-                        <div class="card-footer"></div>
-                    </div>`
-            break;
-    }
-
-    str += "</div>"
     //introduz os cards adicionados à div do catálogo
     document.getElementById("catalogoCards").innerHTML = str
 
